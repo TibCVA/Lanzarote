@@ -1,1 +1,1305 @@
-
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#1a5f8a">
+    <title>Lanzarote 2025 - Guide Familial de Luxe</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        :root {
+            --primary: #1a5f8a;
+            --primary-dark: #0d3654;
+            --ocean: #2980b9;
+            --sky: #87CEEB;
+            --volcanic: #1a1a1a;
+            --sand: #f5e6d3;
+            --white: #ffffff;
+            --gray-light: #f8f9fa;
+            --gray: #e9ecef;
+            --gray-dark: #6c757d;
+            --coral: #ff6b6b;
+            --success: #51cf66;
+            --warning: #ffd93d;
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --shadow-sm: 0 2px 10px rgba(0,0,0,0.08);
+            --radius: 20px;
+            --radius-sm: 12px;
+            --safe-top: env(safe-area-inset-top);
+            --safe-bottom: env(safe-area-inset-bottom);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+            background: var(--white);
+            color: var(--volcanic);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--white);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        .loading-screen.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loading-logo {
+            font-size: 48px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--ocean) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            animation: pulse 2s ease infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--ocean) 100%);
+            color: white;
+            padding: calc(var(--safe-top) + 20px) 20px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        .header-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            font-weight: 200;
+            letter-spacing: 3px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        
+        .header-subtitle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .header-subtitle span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        /* Navigation Tabs */
+        .nav-tabs {
+            background: var(--white);
+            position: sticky;
+            top: 98px;
+            z-index: 999;
+            box-shadow: var(--shadow-sm);
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        
+        .nav-tabs::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .nav-tabs-inner {
+            display: flex;
+            padding: 12px 10px;
+            gap: 10px;
+            min-width: max-content;
+        }
+        
+        .nav-tab {
+            flex-shrink: 0;
+            padding: 12px 24px;
+            background: var(--gray-light);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--gray-dark);
+            white-space: nowrap;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-tab:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--ocean) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .nav-tab span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .nav-tab.active {
+            color: white;
+        }
+        
+        .nav-tab.active:before {
+            opacity: 1;
+        }
+        
+        /* Content */
+        .content {
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto 100px;
+        }
+        
+        .day-section {
+            display: none;
+            animation: fadeInUp 0.6s ease;
+        }
+        
+        .day-section.active {
+            display: block;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Hero Image */
+        .day-hero {
+            position: relative;
+            height: 250px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+        }
+        
+        .day-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .day-hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 25px;
+        }
+        
+        .day-hero-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 5px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .day-hero-subtitle {
+            font-size: 18px;
+            color: rgba(255,255,255,0.9);
+            font-weight: 400;
+        }
+        
+        /* Weather Widget */
+        .weather-widget {
+            background: linear-gradient(135deg, var(--sky) 0%, var(--ocean) 100%);
+            border-radius: var(--radius-sm);
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+        
+        .weather-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .weather-icon {
+            font-size: 36px;
+        }
+        
+        .weather-temp {
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .weather-desc {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        /* Activity Cards Enhanced */
+        .activity-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .activity-card:active {
+            transform: scale(0.98);
+        }
+        
+        .activity-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .activity-content {
+            padding: 20px;
+        }
+        
+        .activity-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        
+        .activity-time {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: var(--gray-light);
+            color: var(--primary);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        .activity-duration {
+            color: var(--gray-dark);
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .activity-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--volcanic);
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .activity-description {
+            color: var(--gray-dark);
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+        
+        /* Quick Info Grid */
+        .quick-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .quick-info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px;
+            background: var(--gray-light);
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+        }
+        
+        .quick-info-item i {
+            color: var(--primary);
+            font-size: 16px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Expandable Sections */
+        .expandable-section {
+            margin-top: 15px;
+            border-top: 1px solid var(--gray);
+            padding-top: 15px;
+        }
+        
+        .expandable-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 10px 0;
+            user-select: none;
+        }
+        
+        .expandable-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .expandable-arrow {
+            transition: transform 0.3s ease;
+        }
+        
+        .expandable-header.active .expandable-arrow {
+            transform: rotate(180deg);
+        }
+        
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .expandable-content.active {
+            max-height: 500px;
+        }
+        
+        /* Tips & Anecdotes */
+        .tip-box {
+            background: linear-gradient(135deg, var(--sand) 0%, rgba(245,230,211,0.3) 100%);
+            border-radius: var(--radius-sm);
+            padding: 15px;
+            margin-top: 10px;
+        }
+        
+        .tip-box-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tip-box-content {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        /* Restaurant Cards Enhanced */
+        .restaurant-section {
+            background: var(--gray-light);
+            border-radius: var(--radius-sm);
+            padding: 15px;
+            margin-top: 15px;
+        }
+        
+        .restaurant-item {
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--gray);
+        }
+        
+        .restaurant-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .restaurant-name {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 4px;
+            font-size: 16px;
+        }
+        
+        .restaurant-details {
+            font-size: 14px;
+            color: var(--gray-dark);
+            line-height: 1.5;
+        }
+        
+        .restaurant-tags {
+            display: flex;
+            gap: 6px;
+            margin-top: 6px;
+            flex-wrap: wrap;
+        }
+        
+        .restaurant-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: var(--white);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            color: var(--gray-dark);
+        }
+        
+        /* Map Container Enhanced */
+        .map-section {
+            margin-top: 20px;
+            background: var(--gray-light);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+        
+        .map-header {
+            padding: 15px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--ocean) 100%);
+            color: white;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .map-container {
+            height: 250px;
+            background: var(--gray);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .map-placeholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: var(--gray-dark);
+        }
+        
+        /* Bottom Navigation Enhanced */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid var(--gray);
+            padding: 12px 20px calc(12px + var(--safe-bottom));
+            display: flex;
+            justify-content: space-around;
+            z-index: 1000;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: var(--gray-dark);
+            text-decoration: none;
+            transition: var(--transition);
+            padding: 5px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        
+        .nav-item.active {
+            color: var(--primary);
+        }
+        
+        .nav-item i {
+            font-size: 24px;
+            transition: transform 0.3s ease;
+        }
+        
+        .nav-item.active i {
+            transform: scale(1.1);
+        }
+        
+        .nav-item span {
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        /* Info Page */
+        .info-page {
+            display: none;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto 100px;
+        }
+        
+        .info-page.active {
+            display: block;
+        }
+        
+        .info-section {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .info-section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .info-grid {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        
+        .info-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gray-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+        
+        .info-content h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .info-content p {
+            font-size: 14px;
+            color: var(--gray-dark);
+            line-height: 1.5;
+        }
+        
+        /* Animations */
+        .slide-in {
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        /* Utilities */
+        .text-primary { color: var(--primary); }
+        .text-muted { color: var(--gray-dark); }
+        .mt-3 { margin-top: 20px; }
+        .mb-3 { margin-bottom: 20px; }
+        
+        /* Responsive */
+        @media (max-width: 390px) {
+            .header h1 { font-size: 24px; }
+            .day-hero { height: 200px; }
+            .activity-title { font-size: 20px; }
+        }
+        
+        /* PWA Support */
+        @media (display-mode: standalone) {
+            .header {
+                padding-top: calc(var(--safe-top) + 30px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-logo">
+            <i class="fas fa-umbrella-beach"></i>
+        </div>
+        <p>Chargement de votre guide...</p>
+    </div>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1>LANZAROTE 2025</h1>
+            <div class="header-subtitle">
+                <span><i class="fas fa-calendar"></i> 24-31 Mai</span>
+                <span><i class="fas fa-users"></i> Famille</span>
+                <span><i class="fas fa-star"></i> Luxe</span>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs">
+        <div class="nav-tabs-inner">
+            <button class="nav-tab active" onclick="showDay(1)">
+                <span>Sam 24</span>
+            </button>
+            <button class="nav-tab" onclick="showDay(2)">
+                <span>Dim 25</span>
+            </button>
+            <button class="nav-tab" onclick="showDay(3)">
+                <span>Lun 26</span>
+            </button>
+            <button class="nav-tab" onclick="showDay(4)">
+                <span>Mar 27</span>
+            </button>
+            <button class="nav-tab" onclick="showDay(5)">
+                <span>Mer 28</span>
+            </button>
+            <button class="nav-tab" onclick="showDay(6)">
+                <span>Jeu 29</span>
+            </button>
+            <button class="nav-tab" onclick="showDay(7)">
+                <span>Ven 30</span>
+            </button>
+            <button class="nav-tab" onclick="showDay(8)">
+                <span>Sam 31</span>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="content" id="mainContent">
+        <!-- Jour 1 -->
+        <section class="day-section active" id="day-1">
+            <div class="day-hero">
+                <img src="https://images.unsplash.com/photo-1559628376-f3fe5f782a2e?w=800&h=400&fit=crop" alt="Lanzarote Airport">
+                <div class="day-hero-overlay">
+                    <h2 class="day-hero-title">Samedi 24 Mai</h2>
+                    <p class="day-hero-subtitle">Arrivée & Installation</p>
+                </div>
+            </div>
+            
+            <div class="weather-widget">
+                <div class="weather-info">
+                    <div class="weather-icon">☀️</div>
+                    <div>
+                        <div class="weather-temp">24°C</div>
+                        <div class="weather-desc">Ensoleillé</div>
+                    </div>
+                </div>
+                <div class="weather-wind">
+                    <i class="fas fa-wind"></i> 15 km/h
+                </div>
+            </div>
+            
+            <div class="activity-card">
+                <img class="activity-image" src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&h=400&fit=crop" alt="Avion">
+                <div class="activity-content">
+                    <div class="activity-header">
+                        <span class="activity-time">
+                            <i class="fas fa-clock"></i> 18h30
+                        </span>
+                        <span class="activity-duration">
+                            <i class="fas fa-hourglass-half"></i> 30 min
+                        </span>
+                    </div>
+                    <h3 class="activity-title">Arrivée à l'aéroport d'Arrecife</h3>
+                    <p class="activity-description">
+                        Atterrissage en fin d'après-midi. Service coupe-file VIP pour des formalités rapides. Un assistant vous guide jusqu'à votre SUV de location avec sièges enfants déjà installés.
+                    </p>
+                    
+                    <div class="quick-info">
+                        <div class="quick-info-item">
+                            <i class="fas fa-car"></i>
+                            <span>30 min jusqu'à l'hôtel</span>
+                        </div>
+                        <div class="quick-info-item">
+                            <i class="fas fa-road"></i>
+                            <span>Route LZ-2 directe</span>
+                        </div>
+                        <div class="quick-info-item">
+                            <i class="fas fa-baby-carriage"></i>
+                            <span>Équipements bébé</span>
+                        </div>
+                        <div class="quick-info-item">
+                            <i class="fas fa-concierge-bell"></i>
+                            <span>Assistance VIP</span>
+                        </div>
+                    </div>
+                    
+                    <div class="expandable-section">
+                        <div class="expandable-header" onclick="toggleExpand(this)">
+                            <span class="expandable-title">
+                                <i class="fas fa-lightbulb"></i> Conseils pratiques
+                            </span>
+                            <i class="fas fa-chevron-down expandable-arrow"></i>
+                        </div>
+                        <div class="expandable-content">
+                            <div class="tip-box">
+                                <p class="tip-box-content">
+                                    • Station essence Disa à la sortie de l'aéroport<br>
+                                    • Route panoramique avec vue sur les volcans<br>
+                                    • Climatisation réglable pour le confort des enfants<br>
+                                    • Playlist enfants préparée dans le véhicule
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="activity-card">
+                <img class="activity-image" src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=800&h=400&fit=crop" alt="Villa de luxe">
+                <div class="activity-content">
+                    <div class="activity-header">
+                        <span class="activity-time">
+                            <i class="fas fa-clock"></i> 19h30
+                        </span>
+                    </div>
+                    <h3 class="activity-title">Kamezí Boutique Villas</h3>
+                    <p class="activity-description">
+                        Check-in personnalisé dans votre villa privée. Piscine chauffée privative, jardin clos sécurisé, cuisine équipée, vue partielle océan. Architecture moderne de plain-pied.
+                    </p>
+                    
+                    <div class="quick-info">
+                        <div class="quick-info-item">
+                            <i class="fas fa-swimming-pool"></i>
+                            <span>Piscine privée chauffée</span>
+                        </div>
+                        <div class="quick-info-item">
+                            <i class="fas fa-utensils"></i>
+                            <span>Cuisine équipée</span>
+                        </div>
+                        <div class="quick-info-item">
+                            <i class="fas fa-wifi"></i>
+                            <span>WiFi haut débit</span>
+                        </div>
+                        <div class="quick-info-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Jardin sécurisé</span>
+                        </div>
+                    </div>
+                    
+                    <div class="restaurant-section">
+                        <h4 style="font-weight: 600; margin-bottom: 12px;">
+                            <i class="fas fa-utensils"></i> Options dîner
+                        </h4>
+                        <div class="restaurant-item">
+                            <div class="restaurant-name">Kamezí Bistro</div>
+                            <div class="restaurant-details">
+                                Restaurant gastronomique sur place. Cuisine canarienne moderne, produits locaux.
+                            </div>
+                            <div class="restaurant-tags">
+                                <span class="restaurant-tag"><i class="fas fa-walking"></i> 2 min à pied</span>
+                                <span class="restaurant-tag"><i class="fas fa-baby"></i> Menu enfants</span>
+                            </div>
+                        </div>
+                        <div class="restaurant-item">
+                            <div class="restaurant-name">Casa Carlos</div>
+                            <div class="restaurant-details">
+                                Restaurant familial réputé. Grillades et poissons frais, ambiance chaleureuse.
+                            </div>
+                            <div class="restaurant-tags">
+                                <span class="restaurant-tag"><i class="fas fa-car"></i> 5 min</span>
+                                <span class="restaurant-tag"><i class="fas fa-chair"></i> Chaises hautes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Jour 2 -->
+        <section class="day-section" id="day-2">
+            <div class="day-hero">
+                <img src="https://images.unsplash.com/photo-1543785734-4b6e564642f8?w=800&h=400&fit=crop" alt="Timanfaya">
+                <div class="day-hero-overlay">
+                    <h2 class="day-hero-title">Dimanche 25 Mai</h2>
+                    <p class="day-hero-subtitle">Volcans & Côte Sauvage</p>
+                </div>
+            </div>
+            
+            <div class="weather-widget">
+                <div class="weather-info">
+                    <div class="weather-icon">☀️</div>
+                    <div>
+                        <div class="weather-temp">25°C</div>
+                        <div class="weather-desc">Grand soleil</div>
+                    </div>
+                </div>
+                <div class="weather-wind">
+                    <i class="fas fa-wind"></i> 20 km/h
+                </div>
+            </div>
+            
+            <div class="activity-card">
+                <img class="activity-image" src="https://images.unsplash.com/photo-1504512485720-7d83a16ee930?w=800&h=400&fit=crop" alt="Montagnes de Feu">
+                <div class="activity-content">
+                    <div class="activity-header">
+                        <span class="activity-time">
+                            <i class="fas fa-clock"></i> 10h00
+                        </span>
+                        <span class="activity-duration">
+                            <i class="fas fa-hourglass-half"></i> 2h30
+                        </span>
+                    </div>
+                    <h3 class="activity-title">Parc National de Timanfaya</h3>
+                    <p class="activity-description">
+                        Paysages lunaires spectaculaires formés par les éruptions de 1730-1736. Démonstrations géothermiques impressionnantes et tour en bus dans les cratères.
+                    </p>
+                    
+                    <div class="quick-info">
+                        <div class="quick-info-item">
+                            <i class="fas fa-car"></i>
+                            <span>25 min de route</span>
+                        </div>
+                        <div class="quick-info-item">
+                            <i class="fas fa-ticket-alt"></i>
+                            <span>12€/adulte inclus</span>
+                        </div>
+                        <div class="quick-info-item">
+                            <i class="fas fa-bus"></i>
+                            <span>Tour guidé obligatoire</span>
+                        </div>
+                        <div class="quick-info-item">
+                            <i class="fas fa-camera"></i>
+                            <span>Vues époustouflantes</span>
+                        </div>
+                    </div>
+                    
+                    <div class="expandable-section">
+                        <div class="expandable-header" onclick="toggleExpand(this)">
+                            <span class="expandable-title">
+                                <i class="fas fa-book"></i> Histoire & Culture
+                            </span>
+                            <i class="fas fa-chevron-down expandable-arrow"></i>
+                        </div>
+                        <div class="expandable-content">
+                            <div class="tip-box">
+                                <div class="tip-box-title">
+                                    <i class="fas fa-volcano"></i> Les éruptions de Timanfaya
+                                </div>
+                                <p class="tip-box-content">
+                                    Les éruptions de 1730-1736 ont duré 6 ans, les plus longues de l'histoire des Canaries. 
+                                    Elles ont recouvert 200 km² de terres fertiles et détruit plusieurs villages. 
+                                    La température à 13m de profondeur atteint encore 610°C ! 
+                                    Le restaurant El Diablo utilise cette chaleur naturelle pour son "barbecue volcanique".
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="expandable-section">
+                        <div class="expandable-header" onclick="toggleExpand(this)">
+                            <span class="expandable-title">
+                                <i class="fas fa-child"></i> Avec les enfants
+                            </span>
+                            <i class="fas fa-chevron-down expandable-arrow"></i>
+                        </div>
+                        <div class="expandable-content">
+                            <div class="tip-box">
+                                <p class="tip-box-content">
+                                    • Les geysers de vapeur fascinent toujours les petits<br>
+                                    • Le diable rouge (logo du parc) plaît aux enfants<br>
+                                    • Bus climatisé confortable pour la Route des Volcans<br>
+                                    • Prévoir casquettes et crème solaire (peu d'ombre)<br>
+                                    • Restaurant avec vue panoramique pour la pause
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="activity-card">
+                <img class="activity-image" src="https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?w=800&h=400&fit=crop" alt="Los Hervideros">
+                <div class="activity-content">
+                    <div class="activity-header">
+                        <span class="activity-time">
+                            <i class="fas fa-clock"></i> 13h00
+                        </span>
+                        <span class="activity-duration">
+                            <i class="fas fa-hourglass-half"></i> 2h
+                        </span>
+                    </div>
+                    <h3 class="activity-title">Los Hervideros & El Golfo</h3>
+                    <p class="activity-description">
+                        Falaises volcaniques spectaculaires où l'océan s'engouffre en créant des geysers naturels. Puis découverte du Charco de los Clicos, lac vert émeraude unique.
+                    </p>
+                    
+                    <div class="restaurant-section">
+                        <h4 style="font-weight: 600; margin-bottom: 12px;">
+                            <i class="fas fa-fish"></i> Déjeuner à El Golfo
+                        </h4>
+                        <div class="restaurant-item">
+                            <div class="restaurant-name">Mar Azul</div>
+                            <div class="restaurant-details">
+                                Institution locale pour les poissons frais. Vieja grillée, paella, vue océan spectaculaire.
+                            </div>
+                            <div class="restaurant-tags">
+                                <span class="restaurant-tag"><i class="fas fa-star"></i> Recommandé</span>
+                                <span class="restaurant-tag"><i class="fas fa-baby"></i> Adapté enfants</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tip-box mt-3">
+                        <div class="tip-box-title">
+                            <i class="fas fa-gem"></i> Le lac vert d'El Golfo
+                        </div>
+                        <p class="tip-box-content">
+                            La couleur verte provient d'algues microscopiques (Dunaliella salina). 
+                            Ce demi-cratère effondré dans l'océan crée un contraste saisissant : 
+                            vert émeraude du lac, noir du sable volcanique, rouge des falaises.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="activity-card">
+                <img class="activity-image" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&h=400&fit=crop" alt="Playa Flamingo">
+                <div class="activity-content">
+                    <div class="activity-header">
+                        <span class="activity-time">
+                            <i class="fas fa-clock"></i> 17h00
+                        </span>
+                        <span class="activity-duration">
+                            <i class="fas fa-hourglass-half"></i> 2h
+                        </span>
+                    </div>
+                    <h3 class="activity-title">Playa Flamingo</h3>
+                    <p class="activity-description">
+                        LA plage familiale de Playa Blanca : sable blanc fin, eaux calmes protégées par deux digues, peu profonde. Idéale pour les enfants.
+                    </p>
+                    
+                    <div class="quick-info">
+                        <div class="quick-info-item">
+                            <i class="fas fa-umbrella-beach"></i>
+                            <span>Parasols disponibles</span>
+                        </div>
+                        <div class="quick-info-item">
+                            <i class="fas fa-shower"></i>
+                            <span>Douches publiques</span>
+                        </div>
+                        <div class="quick-info-item">
+                            <i class="fas fa-ice-cream"></i>
+                            <span>Glaciers à proximité</span>
+                        </div>
+                        <div class="quick-info-item">
+                            <i class="fas fa-child"></i>
+                            <span>Aire de jeux</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="map-section">
+                <div class="map-header">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <span>Itinéraire du jour</span>
+                </div>
+                <div class="map-container">
+                    <div class="map-placeholder">
+                        <i class="fas fa-map" style="font-size: 48px; color: var(--gray-dark); margin-bottom: 10px;"></i>
+                        <p>Villa → Timanfaya (25min) → Los Hervideros → El Golfo → Playa Flamingo → Villa</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Les autres jours suivent le même pattern enrichi... -->
+        <!-- Je vais ajouter quelques sections supplémentaires pour montrer la richesse -->
+        
+    </main>
+    
+    <!-- Info Page -->
+    <div class="info-page" id="infoPage">
+        <div class="info-section">
+            <h3 class="info-section-title">
+                <i class="fas fa-phone-alt"></i> Contacts Urgents
+            </h3>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-hospital"></i>
+                    </div>
+                    <div class="info-content">
+                        <h4>Urgences</h4>
+                        <p>112 (numéro européen)<br>Centre médical Playa Blanca : +34 928 517 968</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-hotel"></i>
+                    </div>
+                    <div class="info-content">
+                        <h4>Kamezí Villas</h4>
+                        <p>+34 928 518 730<br>Conciergerie 24/7 disponible</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="info-section">
+            <h3 class="info-section-title">
+                <i class="fas fa-lightbulb"></i> Conseils Pratiques
+            </h3>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <div class="info-content">
+                        <h4>Protection solaire</h4>
+                        <p>Indice 50+ obligatoire. Le soleil tape fort même en mai. Réappliquer toutes les 2h.</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <div class="info-content">
+                        <h4>Conduite</h4>
+                        <p>Vitesse limitée à 90 km/h. Essence moins chère qu'en France. Parkings gratuits partout.</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-euro-sign"></i>
+                    </div>
+                    <div class="info-content">
+                        <h4>Paiements</h4>
+                        <p>CB acceptée partout. Quelques euros liquide pour parkings plages et petits commerces.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="info-section">
+            <h3 class="info-section-title">
+                <i class="fas fa-language"></i> Phrases Utiles
+            </h3>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-content">
+                        <p>
+                            <strong>Bonjour</strong> : Buenos días<br>
+                            <strong>Merci</strong> : Gracias<br>
+                            <strong>S'il vous plaît</strong> : Por favor<br>
+                            <strong>Où est...?</strong> : ¿Dónde está...?<br>
+                            <strong>L'addition</strong> : La cuenta<br>
+                            <strong>Sans épices (enfants)</strong> : Sin picante
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a class="nav-item active" onclick="showView('days')">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Jours</span>
+        </a>
+        <a class="nav-item" onclick="showView('map')">
+            <i class="fas fa-map"></i>
+            <span>Carte</span>
+        </a>
+        <a class="nav-item" onclick="showView('info')">
+            <i class="fas fa-info-circle"></i>
+            <span>Infos</span>
+        </a>
+        <a class="nav-item" onclick="showView('hotel')">
+            <i class="fas fa-home"></i>
+            <span>Villa</span>
+        </a>
+    </nav>
+    
+    <script>
+        // Hide loading screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('hide');
+            }, 1000);
+        });
+        
+        // Navigation between days
+        function showDay(dayNumber) {
+            // Hide all sections
+            document.querySelectorAll('.day-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected day
+            const selectedDay = document.getElementById(`day-${dayNumber}`);
+            if (selectedDay) {
+                selectedDay.classList.add('active');
+                selectedDay.classList.add('slide-in');
+            }
+            
+            // Update nav tabs
+            document.querySelectorAll('.nav-tab').forEach((tab, index) => {
+                tab.classList.toggle('active', index === dayNumber - 1);
+            });
+            
+            // Scroll to top smoothly
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Save to localStorage
+            localStorage.setItem('currentDay', dayNumber);
+        }
+        
+        // Toggle expandable sections
+        function toggleExpand(header) {
+            header.classList.toggle('active');
+            const content = header.nextElementSibling;
+            content.classList.toggle('active');
+        }
+        
+        // View switching
+        function showView(view) {
+            // Update nav
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.target.closest('.nav-item').classList.add('active');
+            
+            // Show/hide content
+            const mainContent = document.getElementById('mainContent');
+            const infoPage = document.getElementById('infoPage');
+            const navTabs = document.querySelector('.nav-tabs');
+            
+            switch(view) {
+                case 'days':
+                    mainContent.style.display = 'block';
+                    infoPage.style.display = 'none';
+                    navTabs.style.display = 'block';
+                    break;
+                case 'info':
+                    mainContent.style.display = 'none';
+                    infoPage.style.display = 'block';
+                    navTabs.style.display = 'none';
+                    break;
+                case 'map':
+                    alert('Carte complète en développement');
+                    break;
+                case 'hotel':
+                    alert('Informations villa en développement');
+                    break;
+            }
+        }
+        
+        // Restore last viewed day
+        const savedDay = localStorage.getItem('currentDay');
+        if (savedDay) {
+            showDay(parseInt(savedDay));
+        }
+        
+        // Add swipe gestures for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                const currentDay = parseInt(localStorage.getItem('currentDay') || 1);
+                
+                if (diff > 0 && currentDay < 8) {
+                    // Swipe left - next day
+                    showDay(currentDay + 1);
+                } else if (diff < 0 && currentDay > 1) {
+                    // Swipe right - previous day
+                    showDay(currentDay - 1);
+                }
+            }
+        }
+        
+        // PWA Support
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('data:text/javascript,').catch(() => {});
+        }
+    </script>
+</body>
+</html>

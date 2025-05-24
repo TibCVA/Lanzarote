@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#1a5f8a">
-    <title>Lanzarote 2025 - Guide Familial</title>
+    <meta name="theme-color" content="#1a1a1a">
+    <title>Lanzarote 2025 - Guide Familial de Luxe</title>
     
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
@@ -17,52 +19,52 @@
         }
         
         :root {
-            --primary: #1a5f8a;
-            --primary-dark: #0d3654;
-            --ocean: #2980b9;
-            --sky: #87CEEB;
-            --volcanic: #1a1a1a;
-            --sand: #f5e6d3;
-            --white: #ffffff;
-            --gray-light: #f8f9fa;
-            --gray: #e9ecef;
-            --gray-dark: #6c757d;
-            --coral: #ff6b6b;
-            --success: #51cf66;
-            --warning: #ffd93d;
-            --shadow: 0 10px 30px rgba(0,0,0,0.1);
-            --shadow-sm: 0 2px 10px rgba(0,0,0,0.08);
-            --radius: 20px;
-            --radius-sm: 12px;
+            --noir: #1a1a1a;
+            --blanc: #ffffff;
+            --gris-clair: #fafafa;
+            --gris: #f5f5f5;
+            --gris-moyen: #e0e0e0;
+            --gris-fonce: #666666;
+            --accent: #d4a574;
+            --accent-fonce: #b8935f;
+            --bleu-ocean: #4a90a4;
+            --sable: #f7f3ed;
             --safe-top: env(safe-area-inset-top);
             --safe-bottom: env(safe-area-inset-bottom);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --shadow-subtle: 0 2px 20px rgba(0,0,0,0.04);
+            --shadow-medium: 0 10px 40px rgba(0,0,0,0.08);
+            --radius: 16px;
+            --radius-small: 8px;
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
-            background: var(--white);
-            color: var(--volcanic);
-            line-height: 1.6;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--blanc);
+            color: var(--noir);
+            line-height: 1.7;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
         
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+        }
+        
         /* Loading Screen */
         .loading-screen {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: var(--white);
+            inset: 0;
+            background: var(--blanc);
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             z-index: 9999;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.6s ease;
         }
         
         .loading-screen.hide {
@@ -70,72 +72,81 @@
             pointer-events: none;
         }
         
-        .loading-logo {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--ocean) 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 36px;
-            color: white;
-            margin-bottom: 20px;
-            animation: pulse 2s ease infinite;
+        .loading-content {
+            text-align: center;
         }
         
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        .loading-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            border: 2px solid var(--gris-moyen);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            font-size: 14px;
+            color: var(--gris-fonce);
+            letter-spacing: 0.1em;
         }
         
         /* Header */
         .header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--ocean) 100%);
-            color: white;
-            padding: calc(var(--safe-top) + 20px) 20px 20px;
+            background: var(--noir);
+            color: var(--blanc);
+            padding: calc(var(--safe-top) + 30px) 20px 30px;
             position: sticky;
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
         }
         
         .header-content {
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
             text-align: center;
         }
         
         .header h1 {
-            font-size: 28px;
-            font-weight: 200;
-            letter-spacing: 3px;
+            font-size: clamp(28px, 5vw, 36px);
+            font-weight: 700;
+            letter-spacing: 0.05em;
             margin-bottom: 8px;
-            text-transform: uppercase;
         }
         
         .header-subtitle {
             font-size: 14px;
-            opacity: 0.9;
-        }
-        
-        .family-names {
-            font-size: 12px;
+            font-weight: 300;
+            letter-spacing: 0.1em;
             opacity: 0.8;
-            margin-top: 5px;
+            text-transform: uppercase;
         }
         
-        /* Navigation Tabs */
+        .family-info {
+            font-size: 13px;
+            margin-top: 8px;
+            opacity: 0.6;
+            font-weight: 300;
+        }
+        
+        /* Navigation */
         .nav-tabs {
-            background: var(--white);
+            background: var(--blanc);
             position: sticky;
-            top: 98px;
+            top: 120px;
             z-index: 999;
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow-subtle);
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
+            border-bottom: 1px solid var(--gris-moyen);
         }
         
         .nav-tabs::-webkit-scrollbar {
@@ -144,57 +155,42 @@
         
         .nav-tabs-inner {
             display: flex;
-            padding: 12px 10px;
-            gap: 10px;
+            padding: 20px 15px;
+            gap: 15px;
             min-width: max-content;
         }
         
         .nav-tab {
             flex-shrink: 0;
-            padding: 12px 24px;
-            background: var(--gray-light);
-            border: none;
-            border-radius: 25px;
+            padding: 12px 28px;
+            background: transparent;
+            border: 1px solid var(--gris-moyen);
+            border-radius: 30px;
             cursor: pointer;
             transition: var(--transition);
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--gray-dark);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--gris-fonce);
+            letter-spacing: 0.02em;
             white-space: nowrap;
-            position: relative;
-            overflow: hidden;
         }
         
-        .nav-tab:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--ocean) 100%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .nav-tab span {
-            position: relative;
-            z-index: 1;
+        .nav-tab:hover {
+            border-color: var(--accent);
+            color: var(--noir);
         }
         
         .nav-tab.active {
-            color: white;
-        }
-        
-        .nav-tab.active:before {
-            opacity: 1;
+            background: var(--noir);
+            color: var(--blanc);
+            border-color: var(--noir);
         }
         
         /* Content */
         .content {
-            padding: 20px;
-            max-width: 600px;
-            margin: 0 auto 100px;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 0 120px;
         }
         
         .page-content {
@@ -207,17 +203,17 @@
         
         .day-section {
             display: none;
-            animation: fadeInUp 0.6s ease;
+            animation: fadeIn 0.8s ease;
         }
         
         .day-section.active {
             display: block;
         }
         
-        @keyframes fadeInUp {
+        @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -227,177 +223,194 @@
         
         /* Day Header */
         .day-header {
-            background: linear-gradient(135deg, var(--sand) 0%, rgba(245,230,211,0.3) 100%);
-            border-radius: var(--radius);
-            padding: 25px;
-            margin-bottom: 25px;
+            padding: 40px 20px;
             text-align: center;
+            background: var(--gris);
+            margin-bottom: 30px;
         }
         
         .day-date {
-            font-size: 32px;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 5px;
+            font-size: clamp(32px, 6vw, 42px);
+            color: var(--noir);
+            margin-bottom: 10px;
+            letter-spacing: -0.02em;
         }
         
         .day-theme {
-            font-size: 18px;
-            color: var(--ocean);
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            color: var(--accent-fonce);
             font-weight: 400;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
         }
         
-        /* Weather Widget */
+        /* Weather */
         .weather-widget {
-            background: linear-gradient(135deg, var(--sky) 0%, var(--ocean) 100%);
-            border-radius: var(--radius-sm);
-            padding: 15px 20px;
-            margin-bottom: 25px;
+            margin: 0 20px 30px;
+            padding: 20px 25px;
+            background: var(--sable);
+            border-radius: var(--radius);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: white;
         }
         
         .weather-info {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
         }
         
         .weather-icon {
             font-size: 36px;
         }
         
+        .weather-details {
+            text-align: left;
+        }
+        
         .weather-temp {
             font-size: 24px;
             font-weight: 600;
+            color: var(--noir);
         }
         
         .weather-desc {
             font-size: 14px;
-            opacity: 0.9;
+            color: var(--gris-fonce);
         }
         
         /* Activity Cards */
         .activity-card {
-            background: var(--white);
+            background: var(--blanc);
+            margin: 0 20px 25px;
             border-radius: var(--radius);
-            margin-bottom: 20px;
-            box-shadow: var(--shadow-sm);
             overflow: hidden;
+            box-shadow: var(--shadow-subtle);
             transition: var(--transition);
-            position: relative;
         }
         
-        .activity-card:active {
-            transform: scale(0.98);
+        .activity-card:hover {
+            box-shadow: var(--shadow-medium);
+            transform: translateY(-2px);
         }
         
         .activity-content {
-            padding: 20px;
+            padding: 30px;
         }
         
         .activity-header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 12px;
+            align-items: center;
+            margin-bottom: 20px;
         }
         
         .activity-time {
             display: inline-flex;
             align-items: center;
-            gap: 5px;
-            background: var(--gray-light);
-            color: var(--primary);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 13px;
+            gap: 8px;
+            color: var(--accent-fonce);
+            font-size: 14px;
             font-weight: 600;
+            letter-spacing: 0.02em;
         }
         
         .activity-duration {
-            color: var(--gray-dark);
+            color: var(--gris-fonce);
             font-size: 13px;
         }
         
         .activity-title {
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--volcanic);
-            margin-bottom: 10px;
+            font-size: 26px;
+            margin-bottom: 15px;
+            color: var(--noir);
             line-height: 1.3;
         }
         
         .activity-description {
-            color: var(--gray-dark);
             font-size: 15px;
-            line-height: 1.7;
-            margin-bottom: 15px;
+            color: var(--gris-fonce);
+            line-height: 1.8;
+            margin-bottom: 20px;
         }
         
-        /* Quick Info Grid */
-        .quick-info {
+        /* Info Grid */
+        .info-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-bottom: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
         }
         
-        .quick-info-item {
+        .info-item {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 10px;
-            background: var(--gray-light);
-            border-radius: var(--radius-sm);
+            gap: 10px;
+            padding: 12px 16px;
+            background: var(--gris);
+            border-radius: var(--radius-small);
             font-size: 14px;
+            color: var(--gris-fonce);
         }
         
-        .quick-info-item i {
-            color: var(--primary);
-            font-size: 16px;
-            width: 20px;
+        .info-item-icon {
+            color: var(--accent-fonce);
+            font-size: 18px;
         }
         
-        /* Tips */
+        /* Tips Box */
         .tip-box {
-            background: linear-gradient(135deg, var(--sand) 0%, rgba(245,230,211,0.3) 100%);
-            border-radius: var(--radius-sm);
-            padding: 15px;
-            margin-top: 15px;
+            background: var(--sable);
+            border-radius: var(--radius);
+            padding: 25px;
+            margin-top: 20px;
         }
         
         .tip-box-title {
             font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 8px;
+            color: var(--noir);
+            margin-bottom: 12px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
         .tip-box-content {
             font-size: 14px;
-            line-height: 1.6;
+            line-height: 1.8;
+            color: var(--gris-fonce);
         }
         
-        /* Restaurant Cards */
+        .tip-box-content li {
+            margin-bottom: 8px;
+            margin-left: 20px;
+        }
+        
+        /* Restaurant Section */
         .restaurant-section {
-            background: var(--gray-light);
-            border-radius: var(--radius-sm);
-            padding: 15px;
-            margin-top: 15px;
+            background: var(--gris);
+            border-radius: var(--radius);
+            padding: 25px;
+            margin-top: 20px;
         }
         
         .restaurant-title {
             font-weight: 600;
-            margin-bottom: 12px;
-            color: var(--primary);
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: var(--noir);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
         .restaurant-item {
-            margin-bottom: 12px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid var(--gray);
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--gris-moyen);
         }
         
         .restaurant-item:last-child {
@@ -407,128 +420,60 @@
         }
         
         .restaurant-name {
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 4px;
-            font-size: 16px;
+            font-weight: 600;
+            font-size: 18px;
+            color: var(--noir);
+            margin-bottom: 8px;
         }
         
         .restaurant-details {
             font-size: 14px;
-            color: var(--gray-dark);
-            line-height: 1.5;
-        }
-        
-        /* Map Section */
-        .map-section {
-            margin-top: 20px;
-            background: var(--gray-light);
-            border-radius: var(--radius);
-            overflow: hidden;
-        }
-        
-        .map-header {
-            padding: 15px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--ocean) 100%);
-            color: white;
-            font-weight: 600;
-        }
-        
-        .map-container {
-            height: 250px;
-            width: 100%;
-        }
-        
-        .map-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        
-        /* Info Page */
-        .info-section {
-            background: var(--white);
-            border-radius: var(--radius);
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: var(--shadow-sm);
-        }
-        
-        .info-section-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-        
-        .info-grid {
-            display: grid;
-            gap: 15px;
-        }
-        
-        .info-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-        }
-        
-        .info-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--gray-light);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            flex-shrink: 0;
-        }
-        
-        .info-content h4 {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-        
-        .info-content p {
-            font-size: 14px;
-            color: var(--gray-dark);
-            line-height: 1.5;
-        }
-        
-        /* Villa Page */
-        .villa-hero {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--ocean) 100%);
-            color: white;
-            padding: 30px 20px;
-            border-radius: var(--radius);
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        .villa-title {
-            font-size: 28px;
-            font-weight: 300;
-            letter-spacing: 2px;
+            color: var(--gris-fonce);
+            line-height: 1.7;
             margin-bottom: 10px;
         }
         
-        .villa-subtitle {
-            font-size: 16px;
-            opacity: 0.9;
+        .restaurant-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--bleu-ocean);
+            font-size: 13px;
+            text-decoration: none;
+            transition: var(--transition);
         }
         
-        /* Bottom Navigation */
+        .restaurant-link:hover {
+            color: var(--accent-fonce);
+        }
+        
+        /* Map Link */
+        .map-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--bleu-ocean);
+            font-size: 13px;
+            text-decoration: none;
+            margin-top: 10px;
+            transition: var(--transition);
+        }
+        
+        .map-link:hover {
+            color: var(--accent-fonce);
+        }
+        
+        /* Bottom Nav */
         .bottom-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(255,255,255,0.95);
+            background: rgba(255,255,255,0.98);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-top: 1px solid var(--gray);
-            padding: 12px 20px calc(12px + var(--safe-bottom));
+            border-top: 1px solid var(--gris-moyen);
+            padding: 15px 20px calc(15px + var(--safe-bottom));
             display: flex;
             justify-content: space-around;
             z-index: 1000;
@@ -538,148 +483,275 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
-            color: var(--gray-dark);
+            gap: 6px;
+            color: var(--gris-fonce);
             text-decoration: none;
             transition: var(--transition);
-            padding: 5px;
-            border-radius: 10px;
             cursor: pointer;
+            padding: 8px;
         }
         
+        .nav-item:hover,
         .nav-item.active {
-            color: var(--primary);
+            color: var(--noir);
         }
         
         .nav-item-icon {
-            font-size: 24px;
+            font-size: 22px;
+            transition: transform 0.3s ease;
+        }
+        
+        .nav-item:active .nav-item-icon {
+            transform: scale(0.9);
         }
         
         .nav-item span {
             font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+        }
+        
+        /* Map Section */
+        .map-section {
+            margin: 30px 20px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .map-header {
+            padding: 20px 25px;
+            background: var(--noir);
+            color: var(--blanc);
+            font-weight: 500;
+            font-size: 16px;
+            letter-spacing: 0.02em;
+        }
+        
+        .map-container {
+            height: 400px;
+            width: 100%;
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: grayscale(20%);
+        }
+        
+        /* Info Page */
+        .info-section {
+            background: var(--blanc);
+            margin: 0 20px 25px;
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-subtle);
+        }
+        
+        .info-section-title {
+            font-size: 22px;
             font-weight: 600;
+            color: var(--noir);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .info-content {
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--gris-fonce);
+        }
+        
+        .info-content p {
+            margin-bottom: 15px;
+        }
+        
+        .info-content p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Villa Page */
+        .villa-hero {
+            background: var(--noir);
+            color: var(--blanc);
+            padding: 60px 30px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .villa-title {
+            font-size: 36px;
+            margin-bottom: 10px;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+        }
+        
+        .villa-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 300;
+            opacity: 0.8;
+            letter-spacing: 0.05em;
+        }
+        
+        /* Utilities */
+        .text-muted {
+            color: var(--gris-fonce);
+        }
+        
+        .mt-3 {
+            margin-top: 20px;
+        }
+        
+        .mb-3 {
+            margin-bottom: 20px;
         }
         
         /* Icons */
-        .icon-clock:before { content: "🕐"; }
+        .icon-clock:before { content: "⏱"; }
         .icon-car:before { content: "🚗"; }
-        .icon-euro:before { content: "💶"; }
+        .icon-euro:before { content: "€"; margin-right: 2px; }
         .icon-child:before { content: "👶"; }
         .icon-tip:before { content: "💡"; }
         .icon-map:before { content: "📍"; }
         .icon-calendar:before { content: "📅"; }
         .icon-info:before { content: "ℹ️"; }
-        .icon-home:before { content: "🏠"; }
+        .icon-home:before { content: "🏡"; }
         .icon-plane:before { content: "✈️"; }
         .icon-pool:before { content: "🏊"; }
-        .icon-restaurant:before { content: "🍴"; }
-        .icon-beach:before { content: "🏖️"; }
+        .icon-restaurant:before { content: "🍽"; }
+        .icon-beach:before { content: "🏖"; }
         .icon-fish:before { content: "🐟"; }
         .icon-volcano:before { content: "🌋"; }
         .icon-camera:before { content: "📸"; }
         
-        /* Utilities */
-        .text-primary { color: var(--primary); }
-        .text-muted { color: var(--gray-dark); }
-        .mt-3 { margin-top: 20px; }
-        .mb-3 { margin-bottom: 20px; }
-        
         /* Responsive */
+        @media (max-width: 600px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .activity-content {
+                padding: 25px 20px;
+            }
+            
+            .weather-widget {
+                padding: 18px 20px;
+            }
+        }
+        
         @media (max-width: 390px) {
-            .header h1 { font-size: 24px; }
-            .day-date { font-size: 28px; }
-            .activity-title { font-size: 20px; }
+            .header h1 {
+                font-size: 26px;
+            }
+            
+            .day-date {
+                font-size: 30px;
+            }
+            
+            .activity-title {
+                font-size: 22px;
+            }
         }
     </style>
 </head>
 <body>
     <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
-        <div class="loading-logo">🌴</div>
-        <p>Chargement du guide...</p>
+        <div class="loading-content">
+            <div class="loading-icon"></div>
+            <p class="loading-text">CHARGEMENT DU GUIDE</p>
+        </div>
     </div>
     
     <!-- Header -->
     <header class="header">
         <div class="header-content">
             <h1>LANZAROTE 2025</h1>
-            <div class="header-subtitle">Voyage Familial de Luxe • 24-31 Mai</div>
-            <div class="family-names">Thibaut, Alix, Georges (5 ans) & Joséphine (3 ans)</div>
+            <p class="header-subtitle">Voyage Familial de Luxe</p>
+            <p class="family-info">Thibaut & Alix • Georges (5 ans) & Joséphine (3 ans)</p>
         </div>
     </header>
     
-    <!-- Navigation Tabs (pour la vue Jours) -->
-    <nav class="nav-tabs" id="dayNavTabs" style="display: block;">
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs" id="dayNavTabs">
         <div class="nav-tabs-inner">
             <button class="nav-tab active" onclick="showDay(1)">
-                <span>Sam 24</span>
+                <span>SAM 24</span>
             </button>
             <button class="nav-tab" onclick="showDay(2)">
-                <span>Dim 25</span>
+                <span>DIM 25</span>
             </button>
             <button class="nav-tab" onclick="showDay(3)">
-                <span>Lun 26</span>
+                <span>LUN 26</span>
             </button>
             <button class="nav-tab" onclick="showDay(4)">
-                <span>Mar 27</span>
+                <span>MAR 27</span>
             </button>
             <button class="nav-tab" onclick="showDay(5)">
-                <span>Mer 28</span>
+                <span>MER 28</span>
             </button>
             <button class="nav-tab" onclick="showDay(6)">
-                <span>Jeu 29</span>
+                <span>JEU 29</span>
             </button>
             <button class="nav-tab" onclick="showDay(7)">
-                <span>Ven 30</span>
+                <span>VEN 30</span>
             </button>
             <button class="nav-tab" onclick="showDay(8)">
-                <span>Sam 31</span>
+                <span>SAM 31</span>
             </button>
         </div>
     </nav>
     
-    <!-- Main Content Container -->
+    <!-- Main Content -->
     <main class="content">
         <!-- Days View -->
         <div class="page-content active" id="daysContent">
+            
             <!-- Jour 1 : Samedi 24 Mai -->
             <section class="day-section active" id="day-1">
                 <div class="day-header">
-                    <div class="day-date">Samedi 24 Mai</div>
-                    <div class="day-theme">Arrivée & Installation</div>
+                    <h2 class="day-date">Samedi 24 Mai</h2>
+                    <p class="day-theme">Arrivée & Installation</p>
                 </div>
                 
                 <div class="weather-widget">
                     <div class="weather-info">
                         <div class="weather-icon">☀️</div>
-                        <div>
+                        <div class="weather-details">
                             <div class="weather-temp">24°C</div>
                             <div class="weather-desc">Ensoleillé, brise légère</div>
                         </div>
                     </div>
+                    <div class="weather-desc">Coucher du soleil : 20h45</div>
                 </div>
                 
                 <div class="activity-card">
                     <div class="activity-content">
                         <div class="activity-header">
                             <span class="activity-time"><i class="icon-clock"></i> 18h30</span>
-                            <span class="activity-duration">Vol ~4h</span>
+                            <span class="activity-duration">Vol depuis la France ~4h</span>
                         </div>
                         <h3 class="activity-title">Arrivée à l'aéroport d'Arrecife</h3>
                         <p class="activity-description">
-                            Atterrissage en fin d'après-midi. Récupération de votre voiture de location (SUV climatisé avec sièges auto et rehausseur déjà installés).
+                            Atterrissage en fin d'après-midi à Lanzarote. Service coupe-file inclus via l'agence pour des formalités rapides. Un assistant vous accompagne à l'agence de location pour récupérer votre véhicule réservé : SUV climatisé avec siège auto et rehausseur déjà installés.
                         </p>
-                        
-                        <div class="quick-info">
-                            <div class="quick-info-item">
-                                <i class="icon-car"></i>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-item-icon"><i class="icon-car"></i></span>
                                 <span>30 min jusqu'à l'hôtel</span>
                             </div>
-                            <div class="quick-info-item">
-                                <i class="icon-map"></i>
-                                <span>Route LZ-2 direction sud</span>
+                            <div class="info-item">
+                                <span class="info-item-icon"><i class="icon-map"></i></span>
+                                <span>Autoroute LZ-2 direction sud</span>
                             </div>
                         </div>
+                        <a href="https://maps.google.com/?q=Aeropuerto+de+Lanzarote" target="_blank" class="map-link">
+                            <i class="icon-map"></i> Voir sur Google Maps
+                        </a>
                     </div>
                 </div>
                 
@@ -690,23 +762,49 @@
                         </div>
                         <h3 class="activity-title">Installation au Kamezí Boutique Villas</h3>
                         <p class="activity-description">
-                            Check-in dans votre villa privée : piscine chauffée privative, jardin clos, cuisine équipée. Villa de plain-pied avec vue partielle sur l'océan et accès direct au littoral rocheux.
+                            Check-in VIP à la réception du boutique-hôtel, puis découverte de votre villa de luxe réservée : vaste espace moderne de plain-pied, piscine chauffée privée, jardin privé avec vue partielle sur l'océan, et accès direct au littoral rocheux. Le confort est absolu – comme à la maison, avec les services hôteliers en plus.
                         </p>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-item-icon"><i class="icon-pool"></i></span>
+                                <span>Piscine privée chauffée</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-item-icon"><i class="icon-home"></i></span>
+                                <span>Villa de plain-pied</span>
+                            </div>
+                        </div>
+                        <a href="https://maps.google.com/?q=Kamezi+Boutique+Villas+Playa+Blanca" target="_blank" class="map-link">
+                            <i class="icon-map"></i> Voir sur Google Maps
+                        </a>
                         
                         <div class="restaurant-section">
-                            <div class="restaurant-title"><i class="icon-restaurant"></i> Options dîner</div>
+                            <h4 class="restaurant-title"><i class="icon-restaurant"></i> Options dîner du soir</h4>
                             <div class="restaurant-item">
-                                <div class="restaurant-name">Kamezí Bistro</div>
-                                <div class="restaurant-details">
-                                    Restaurant gastronomique décontracté sur place. Cuisine locale raffinée avec menu enfant. À 2 pas de la villa.
-                                </div>
+                                <p class="restaurant-name">Kamezí Bistro</p>
+                                <p class="restaurant-details">
+                                    Restaurant gastronomique décontracté du complexe, à deux pas. Cuisine locale raffinée avec menu enfant disponible (poisson frais grillé ou filet de poulet mariné).
+                                </p>
+                                <a href="https://maps.google.com/?q=Kamezi+Bistro+Playa+Blanca" target="_blank" class="restaurant-link">
+                                    <i class="icon-map"></i> Directions
+                                </a>
                             </div>
                             <div class="restaurant-item">
-                                <div class="restaurant-name">Casa Carlos</div>
-                                <div class="restaurant-details">
-                                    Adresse familiale appréciée à 5 min en voiture. Viandes et poissons de qualité, atmosphère chaleureuse.
-                                </div>
+                                <p class="restaurant-name">Casa Carlos</p>
+                                <p class="restaurant-details">
+                                    Adresse locale réputée à 5 minutes en voiture. Restaurant familial parfait pour un premier dîner canarien dans une atmosphère chaleureuse. Viandes et poissons de qualité.
+                                </p>
+                                <a href="https://maps.google.com/?q=Casa+Carlos+Playa+Blanca" target="_blank" class="restaurant-link">
+                                    <i class="icon-map"></i> Directions
+                                </a>
                             </div>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <p class="tip-box-title"><i class="icon-tip"></i> Conseil première soirée</p>
+                            <p class="tip-box-content">
+                                La conciergerie peut avoir rempli le réfrigérateur selon votre liste de courses demandée à l'avance. Si vous préférez un repas simple ce soir après le voyage, un en-cas dans la villa est idéal. Les enfants pourront découvrir la piscine illuminée le soir.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -715,46 +813,59 @@
             <!-- Jour 2 : Dimanche 25 Mai -->
             <section class="day-section" id="day-2">
                 <div class="day-header">
-                    <div class="day-date">Dimanche 25 Mai</div>
-                    <div class="day-theme">Volcans de Timanfaya & Côte de lave</div>
+                    <h2 class="day-date">Dimanche 25 Mai</h2>
+                    <p class="day-theme">Volcans de Timanfaya & Côte de lave</p>
                 </div>
                 
                 <div class="weather-widget">
                     <div class="weather-info">
                         <div class="weather-icon">☀️</div>
-                        <div>
+                        <div class="weather-details">
                             <div class="weather-temp">25°C</div>
                             <div class="weather-desc">Grand soleil</div>
                         </div>
                     </div>
+                    <div class="weather-desc">Lumière magnifique sur les volcans</div>
                 </div>
                 
                 <div class="activity-card">
                     <div class="activity-content">
                         <div class="activity-header">
                             <span class="activity-time"><i class="icon-clock"></i> 10h00</span>
-                            <span class="activity-duration">2h30</span>
+                            <span class="activity-duration">Route des Volcans ~2h30</span>
                         </div>
                         <h3 class="activity-title">Parc National de Timanfaya</h3>
                         <p class="activity-description">
-                            Découverte des Montagnes de Feu : paysage martien formé par les éruptions de 1730-1736. Démonstrations géothermiques spectaculaires et tour en bus dans les cratères.
+                            Découverte des Montagnes de Feu (Montañas del Fuego) : paysage lunaire spectaculaire formé par les éruptions de 1730-1736. Démonstrations géothermiques impressionnantes à l'Islote de Hilario : geysers de vapeur et branchages qui s'enflamment spontanément. Tour obligatoire en bus dans les cratères (Route des Volcans, 14 km).
                         </p>
-                        
-                        <div class="quick-info">
-                            <div class="quick-info-item">
-                                <i class="icon-car"></i>
-                                <span>25 min de route</span>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-item-icon"><i class="icon-car"></i></span>
+                                <span>25 min de route via Yaiza</span>
                             </div>
-                            <div class="quick-info-item">
-                                <i class="icon-euro"></i>
+                            <div class="info-item">
+                                <span class="info-item-icon"><i class="icon-euro"></i></span>
                                 <span>Entrée ~12€/adulte</span>
                             </div>
                         </div>
+                        <a href="https://maps.google.com/?q=Parque+Nacional+de+Timanfaya" target="_blank" class="map-link">
+                            <i class="icon-map"></i> Voir sur Google Maps
+                        </a>
                         
                         <div class="tip-box">
-                            <div class="tip-box-title"><i class="icon-volcano"></i> Le saviez-vous ?</div>
+                            <p class="tip-box-title"><i class="icon-volcano"></i> Histoire volcanique</p>
                             <p class="tip-box-content">
-                                Les éruptions ont duré 6 ans (1730-1736), recouvrant 200 km² de terres. La température à 13m de profondeur atteint encore 610°C ! Les démonstrations incluent des geysers de vapeur et des branchages qui s'enflamment.
+                                Les éruptions ont duré 6 ans, les plus longues de l'histoire des Canaries. Elles ont recouvert 200 km² de terres fertiles et détruit plusieurs villages. La température à 13m de profondeur atteint encore 610°C ! Le restaurant El Diablo sur place utilise cette chaleur naturelle pour son "barbecue volcanique" - expérience unique même si la qualité est correcte sans plus.
+                            </p>
+                        </div>
+                        
+                        <div class="tip-box mt-3">
+                            <p class="tip-box-title"><i class="icon-child"></i> Avec les enfants</p>
+                            <p class="tip-box-content">
+                                • Les démonstrations de vapeur fascinent toujours les petits<br>
+                                • Le diable rouge stylisé (symbole du parc) plaît aux enfants<br>
+                                • Bus climatisé confortable, prévoir un gilet si fort<br>
+                                • Restaurant panoramique pour une pause glace ou jus de fruits
                             </p>
                         </div>
                     </div>
@@ -764,26 +875,35 @@
                     <div class="activity-content">
                         <div class="activity-header">
                             <span class="activity-time"><i class="icon-clock"></i> 13h00</span>
-                            <span class="activity-duration">2h</span>
+                            <span class="activity-duration">Côte sauvage & déjeuner</span>
                         </div>
                         <h3 class="activity-title">Los Hervideros & El Golfo</h3>
                         <p class="activity-description">
-                            Falaises volcaniques où les vagues créent des "bouilloires" naturelles. Puis découverte du Charco de los Clicos, lac vert émeraude dans un demi-cratère.
+                            Los Hervideros ("les bouilloires") : falaises volcaniques percées de grottes où les vagues de l'Atlantique créent des geysers d'écume spectaculaires. Puis village d'El Golfo et son Charco de los Clicos, étonnant lac vert émeraude niché dans un demi-cratère sur la plage de sable noir.
                         </p>
+                        <a href="https://maps.google.com/?q=Los+Hervideros+Lanzarote" target="_blank" class="map-link">
+                            <i class="icon-map"></i> Los Hervideros
+                        </a>
                         
                         <div class="restaurant-section">
-                            <div class="restaurant-title"><i class="icon-fish"></i> Déjeuner à El Golfo</div>
+                            <h4 class="restaurant-title"><i class="icon-fish"></i> Déjeuner à El Golfo</h4>
                             <div class="restaurant-item">
-                                <div class="restaurant-name">Mar Azul</div>
-                                <div class="restaurant-details">
-                                    Poissons du jour pêchés le matin. Vieja grillée, paella, papas arrugadas. Terrasse face à l'océan.
-                                </div>
+                                <p class="restaurant-name">Restaurante Mar Azul</p>
+                                <p class="restaurant-details">
+                                    Institution locale pour les poissons du jour pêchés le matin. Vieja grillée, mérou, thon blanc servis avec papas arrugadas et mojo. Paella aux fruits de mer excellente. Terrasse couverte vue océan.
+                                </p>
+                                <a href="https://maps.google.com/?q=Restaurante+Mar+Azul+El+Golfo" target="_blank" class="restaurant-link">
+                                    <i class="icon-map"></i> Directions
+                                </a>
                             </div>
                             <div class="restaurant-item">
-                                <div class="restaurant-name">Casa Rafa</div>
-                                <div class="restaurant-details">
-                                    Institution locale. Parillada de poissons variés. Service familial chaleureux.
-                                </div>
+                                <p class="restaurant-name">Casa Rafa</p>
+                                <p class="restaurant-details">
+                                    Autre excellente option en front de mer. Parillada de poissons variés, service chaleureux habitué aux familles. Portions adaptées pour enfants sur demande.
+                                </p>
+                                <a href="https://maps.google.com/?q=Casa+Rafa+El+Golfo" target="_blank" class="restaurant-link">
+                                    <i class="icon-map"></i> Directions
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -792,31 +912,42 @@
                 <div class="activity-card">
                     <div class="activity-content">
                         <div class="activity-header">
-                            <span class="activity-time"><i class="icon-clock"></i> 17h00</span>
-                            <span class="activity-duration">1h30</span>
+                            <span class="activity-time"><i class="icon-clock"></i> 15h30</span>
+                            <span class="activity-duration">Retour villa pour sieste</span>
                         </div>
-                        <h3 class="activity-title">Playa Flamingo</h3>
+                        <h3 class="activity-title">Sieste & Playa Flamingo</h3>
                         <p class="activity-description">
-                            Plage familiale idéale de Playa Blanca : sable blanc fin, eaux calmes protégées par deux digues, peu profonde. Aire de jeux pour enfants sous les palmiers.
+                            Retour à la villa (20 min) pour la sieste bien méritée. Vers 17h-17h30, sortie à Playa Flamingo, la plage familiale idéale de Playa Blanca : sable blanc fin, eaux calmes protégées par deux digues, peu profonde. Aire de jeux sous les palmiers pour les enfants.
                         </p>
-                        
-                        <div class="quick-info">
-                            <div class="quick-info-item">
-                                <i class="icon-beach"></i>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-item-icon"><i class="icon-beach"></i></span>
                                 <span>5 min de la villa</span>
                             </div>
-                            <div class="quick-info-item">
-                                <i class="icon-child"></i>
-                                <span>Idéale pour les enfants</span>
+                            <div class="info-item">
+                                <span class="info-item-icon"><i class="icon-child"></i></span>
+                                <span>Parasols et glaciers</span>
                             </div>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="map-section">
-                    <div class="map-header"><i class="icon-map"></i> Itinéraire du jour</div>
-                    <div class="map-container">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m40!1m12!1m3!1d224807.79561!2d-13.8627!3d28.9231!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m25!3e0!4m5!1s0xc463977b1efb0cd%3A0xfc87d543ec0c4f0!2sPlaya%20Blanca%2C%20Las%20Palmas%2C%20Spain!3m2!1d28.8621!2d-13.8301!4m5!1s0xc463788df8e6be1%3A0xc7c30cd3bc87e1f9!2sTimanfaya%20National%20Park%2C%20Las%20Palmas%2C%20Spain!3m2!1d29.0347!2d-13.7503!4m5!1s0xc46371d7e9c2a8f%3A0x4e62b0e6bcc3f1a7!2sLos%20Hervideros%2C%20Yaiza%2C%20Spain!3m2!1d28.9895!2d-13.8239!4m5!1s0xc4636e3dc0c6a8f%3A0xf0f5b0a5d0c3b0!2sEl%20Golfo%2C%20Las%20Palmas%2C%20Spain!3m2!1d29.0544!2d-13.8263!5e0!3m2!1sen!2sfr!4v1693000000000!5m2!1sen!2sfr"></iframe>
+                        <a href="https://maps.google.com/?q=Playa+Flamingo+Playa+Blanca" target="_blank" class="map-link">
+                            <i class="icon-map"></i> Voir sur Google Maps
+                        </a>
+                        
+                        <div class="restaurant-section">
+                            <h4 class="restaurant-title"><i class="icon-restaurant"></i> Options dîner</h4>
+                            <div class="restaurant-item">
+                                <p class="restaurant-name">Barbecue à la villa</p>
+                                <p class="restaurant-details">
+                                    Ambiance "comme à la maison" : grillades sur le barbecue du jardin. Meilleures viandes locales (entrecôte de bœuf des Canaries, côtelettes de chevreau) à acheter à la Boucherie de Yaiza. Salade de tomates de Lanzarote, vin blanc Malvasía Seco.
+                                </p>
+                            </div>
+                            <div class="restaurant-item">
+                                <p class="restaurant-name">Restaurant à Playa Blanca</p>
+                                <p class="restaurant-details">
+                                    Si envie de sortir : nombreuses options familiales dans le centre. Livraison à la villa également possible via la conciergerie.
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -824,50 +955,69 @@
             <!-- Jour 3 : Lundi 26 Mai -->
             <section class="day-section" id="day-3">
                 <div class="day-header">
-                    <div class="day-date">Lundi 26 Mai</div>
-                    <div class="day-theme">Journée ludique au Rancho Texas</div>
+                    <h2 class="day-date">Lundi 26 Mai</h2>
+                    <p class="day-theme">Journée ludique au Rancho Texas</p>
                 </div>
                 
                 <div class="weather-widget">
                     <div class="weather-info">
                         <div class="weather-icon">⛅</div>
-                        <div>
+                        <div class="weather-details">
                             <div class="weather-temp">24°C</div>
                             <div class="weather-desc">Quelques nuages</div>
                         </div>
                     </div>
+                    <div class="weather-desc">Idéal pour une journée au parc</div>
                 </div>
                 
                 <div class="activity-card">
                     <div class="activity-content">
                         <div class="activity-header">
-                            <span class="activity-time"><i class="icon-clock"></i> 10h00</span>
-                            <span class="activity-duration">Journée complète</span>
+                            <span class="activity-time"><i class="icon-clock"></i> 9h45</span>
+                            <span class="activity-duration">Départ vers le parc</span>
                         </div>
-                        <h3 class="activity-title">Rancho Texas Park</h3>
+                        <h3 class="activity-title">Rancho Texas Lanzarote Park</h3>
                         <p class="activity-description">
-                            Parc animalier et aquatique sur thème western. Spectacles d'animaux (perroquets, otaries, dauphins), zoo avec tigres blancs et tortues géantes, zone aquatique avec pataugeoire.
+                            Parc animalier et de loisirs sur thème Far West, idéal pour les familles. Zoo avec tigres blancs, panthères, singes, tortues géantes des Galápagos et alligators. Spectacles ludiques : perroquets et cacatoès (11h), lions de mer (11h30), dauphins (12h). Zone aquatique avec pataugeoire et petit toboggan pour les moins de 6 ans.
                         </p>
-                        
-                        <div class="quick-info">
-                            <div class="quick-info-item">
-                                <i class="icon-car"></i>
-                                <span>30 min de route</span>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-item-icon"><i class="icon-car"></i></span>
+                                <span>30 min via Puerto del Carmen</span>
                             </div>
-                            <div class="quick-info-item">
-                                <i class="icon-pool"></i>
-                                <span>Zone aquatique incluse</span>
+                            <div class="info-item">
+                                <span class="info-item-icon"><i class="icon-pool"></i></span>
+                                <span>Prévoir maillots</span>
+                            </div>
+                        </div>
+                        <a href="https://maps.google.com/?q=Rancho+Texas+Park+Lanzarote" target="_blank" class="map-link">
+                            <i class="icon-map"></i> Voir sur Google Maps
+                        </a>
+                        
+                        <div class="restaurant-section">
+                            <h4 class="restaurant-title"><i class="icon-restaurant"></i> Déjeuner sur place</h4>
+                            <div class="restaurant-item">
+                                <p class="restaurant-name">Buffalo Ranch Grill</p>
+                                <p class="restaurant-details">
+                                    Ambiance western sous tipis géants. Menu simple et rapide : burgers, nuggets/frites, salades. Service adapté aux enfants affamés. Possibilité de réchauffer petits pots.
+                                </p>
+                            </div>
+                            <div class="restaurant-item">
+                                <p class="restaurant-name">Dining Plaza</p>
+                                <p class="restaurant-details">
+                                    Alternative plus calme. Plats internationaux et canariens (poulet grillé, chili con carne doux) sur terrasse ombragée.
+                                </p>
                             </div>
                         </div>
                         
                         <div class="tip-box">
-                            <div class="tip-box-title"><i class="icon-tip"></i> Programme des spectacles</div>
+                            <p class="tip-box-title"><i class="icon-tip"></i> Organisation de la journée</p>
                             <p class="tip-box-content">
-                                • 11h00 : Show des perroquets<br>
-                                • 11h30 : Spectacle des otaries<br>
-                                • 12h00 : Dauphins<br>
-                                • Restaurants sur place : Buffalo Ranch Grill<br>
-                                • Prévoir maillots et serviettes
+                                • Arrivée 10h15 à l'ouverture pour éviter la foule<br>
+                                • Matinée : animaux et spectacles<br>
+                                • Après-midi : zone aquatique (vestiaires et casiers disponibles)<br>
+                                • Gilets flottants gratuits pour la pataugeoire<br>
+                                • Retour 15h pour sieste pendant le trajet
                             </p>
                         </div>
                     </div>
@@ -877,11 +1027,40 @@
                     <div class="activity-content">
                         <div class="activity-header">
                             <span class="activity-time"><i class="icon-clock"></i> 16h00</span>
+                            <span class="activity-duration">Retour à la villa</span>
                         </div>
-                        <h3 class="activity-title">Retour & Détente villa</h3>
+                        <h3 class="activity-title">Après-midi libre & Dîner</h3>
                         <p class="activity-description">
-                            Sieste pendant le trajet retour. Fin d'après-midi libre à la piscine privée. Options dîner : La Chalanita ou El Peregrino à Playa Blanca, ou livraison à la villa.
+                            Retour à la villa pour récupération. Jeux dans le jardin clos ou baignade dans la piscine privative. Apéritif au coucher du soleil sur la terrasse.
                         </p>
+                        
+                        <div class="restaurant-section">
+                            <h4 class="restaurant-title"><i class="icon-restaurant"></i> Options dîner</h4>
+                            <div class="restaurant-item">
+                                <p class="restaurant-name">La Chalanita</p>
+                                <p class="restaurant-details">
+                                    Avenue maritime de Playa Blanca. Cuisine espagnole et internationale de qualité (excellents steaks des îles et poissons locaux). Vue mer, chaises hautes, menu enfant.
+                                </p>
+                                <a href="https://maps.google.com/?q=La+Chalanita+Playa+Blanca" target="_blank" class="restaurant-link">
+                                    <i class="icon-map"></i> Directions
+                                </a>
+                            </div>
+                            <div class="restaurant-item">
+                                <p class="restaurant-name">El Peregrino</p>
+                                <p class="restaurant-details">
+                                    Tapas-bar apprécié des locaux. Assiettes à partager idéales en famille. Attention : petit et sans vue.
+                                </p>
+                                <a href="https://maps.google.com/?q=El+Peregrino+Playa+Blanca" target="_blank" class="restaurant-link">
+                                    <i class="icon-map"></i> Directions
+                                </a>
+                            </div>
+                            <div class="restaurant-item">
+                                <p class="restaurant-name">Livraison à la villa</p>
+                                <p class="restaurant-details">
+                                    Si fatigue : pizzas artisanales ou plats canariens à emporter via la conciergerie. Dîner tranquille au bord de la piscine.
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -889,46 +1068,49 @@
             <!-- Jour 4 : Mardi 27 Mai -->
             <section class="day-section" id="day-4">
                 <div class="day-header">
-                    <div class="day-date">Mardi 27 Mai</div>
-                    <div class="day-theme">Exploration du nord</div>
+                    <h2 class="day-date">Mardi 27 Mai</h2>
+                    <p class="day-theme">Nord de l'île : grottes enchantées</p>
                 </div>
                 
                 <div class="weather-widget">
                     <div class="weather-info">
                         <div class="weather-icon">☀️</div>
-                        <div>
+                        <div class="weather-details">
                             <div class="weather-temp">25°C</div>
-                            <div class="weather-desc">Ensoleillé</div>
+                            <div class="weather-desc">Beau temps</div>
                         </div>
                     </div>
+                    <div class="weather-desc">Parfait pour explorer le nord</div>
                 </div>
                 
                 <div class="activity-card">
                     <div class="activity-content">
                         <div class="activity-header">
-                            <span class="activity-time"><i class="icon-clock"></i> 11h00</span>
-                            <span class="activity-duration">1h</span>
+                            <span class="activity-time"><i class="icon-clock"></i> 10h00</span>
+                            <span class="activity-duration">Départ vers le nord</span>
                         </div>
                         <h3 class="activity-title">Jameos del Agua</h3>
                         <p class="activity-description">
-                            Chef-d'œuvre de César Manrique : grotte volcanique avec lac souterrain cristallin abritant des crabes albinos uniques. Piscine turquoise dans la grotte et jardin tropical.
+                            Lieu d'exception combinant phénomène naturel et génie artistique de César Manrique. Section de tunnel volcanique effondré aménagée en attraction unique. Lac souterrain d'eau salée cristalline abritant les fameux crabes albinos endémiques (Munidopsis polymorpha). Splendide piscine turquoise nichée dans la cavité volcanique, purement décorative. Auditorium dans la grotte pour concerts.
                         </p>
-                        
-                        <div class="quick-info">
-                            <div class="quick-info-item">
-                                <i class="icon-car"></i>
-                                <span>1h de route</span>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-item-icon"><i class="icon-car"></i></span>
+                                <span>1h via LZ-1 et LZ-2</span>
                             </div>
-                            <div class="quick-info-item">
-                                <i class="icon-camera"></i>
+                            <div class="info-item">
+                                <span class="info-item-icon"><i class="icon-camera"></i></span>
                                 <span>Site spectaculaire</span>
                             </div>
                         </div>
+                        <a href="https://maps.google.com/?q=Jameos+del+Agua+Lanzarote" target="_blank" class="map-link">
+                            <i class="icon-map"></i> Voir sur Google Maps
+                        </a>
                         
                         <div class="tip-box">
-                            <div class="tip-box-title">🦀 Les crabes albinos</div>
+                            <p class="tip-box-title">🦀 Les crabes albinos</p>
                             <p class="tip-box-content">
-                                Les Munidopsis polymorpha sont uniques au monde et endémiques des Jameos. Minuscules crustacés aveugles d'un blanc laiteux, ils sont l'emblème du site. Les enfants adorent les chercher dans l'eau cristalline !
+                                Minuscules crustacés aveugles d'un blanc laiteux, uniques au monde et emblème des Jameos. Les enfants adorent les chercher dans l'eau transparente - comme des petits bijoux vivants ! Tenir les enfants par la main dans les escaliers et près du lac (pas de rambardes partout).
                             </p>
                         </div>
                     </div>
@@ -937,27 +1119,33 @@
                 <div class="activity-card">
                     <div class="activity-content">
                         <div class="activity-header">
-                            <span class="activity-time"><i class="icon-clock"></i> 13h00</span>
-                            <span class="activity-duration">1h30</span>
+                            <span class="activity-time"><i class="icon-clock"></i> 12h30</span>
+                            <span class="activity-duration">Village de pêcheurs</span>
                         </div>
-                        <h3 class="activity-title">Déjeuner à Arrieta</h3>
+                        <h3 class="activity-title">Déjeuner à Arrieta & Plage</h3>
                         <p class="activity-description">
-                            Village de pêcheurs authentique. Puis pause à Playa de la Garita, plage familiale de sable clair avec aire de jeux.
+                            Court trajet (5 min) jusqu'au petit port de pêche d'Arrieta. Après le déjeuner, les enfants peuvent jouer sur la Playa de la Garita, jolie plage familiale de sable doré clair, bien abritée avec petite aire de jeux.
                         </p>
                         
                         <div class="restaurant-section">
-                            <div class="restaurant-title"><i class="icon-fish"></i> Restaurants recommandés</div>
+                            <h4 class="restaurant-title"><i class="icon-fish"></i> Restaurants à Arrieta</h4>
                             <div class="restaurant-item">
-                                <div class="restaurant-name">El Amanecer</div>
-                                <div class="restaurant-details">
-                                    Poisson perroquet grillé, croquettes maison, soupe de poisson locale. Terrasse face au port.
-                                </div>
+                                <p class="restaurant-name">El Amanecer</p>
+                                <p class="restaurant-details">
+                                    Face à la jetée. Poisson perroquet grillé (vieja), filet de merlu, croquettes de poisson maison, soupe de poisson locale. Ambiance authentique fréquentée par les locaux.
+                                </p>
+                                <a href="https://maps.google.com/?q=Restaurante+El+Amanecer+Arrieta" target="_blank" class="restaurant-link">
+                                    <i class="icon-map"></i> Directions
+                                </a>
                             </div>
                             <div class="restaurant-item">
-                                <div class="restaurant-name">Casa de la Playa</div>
-                                <div class="restaurant-details">
-                                    Cuisine canarienne traditionnelle. Options viande et menus enfants disponibles.
-                                </div>
+                                <p class="restaurant-name">Casa de la Playa</p>
+                                <p class="restaurant-details">
+                                    Alternative proche. Poissons du jour, options viande et menus enfants disponibles.
+                                </p>
+                                <a href="https://maps.google.com/?q=Casa+de+la+Playa+Arrieta" target="_blank" class="restaurant-link">
+                                    <i class="icon-map"></i> Directions
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -966,12 +1154,41 @@
                 <div class="activity-card">
                     <div class="activity-content">
                         <div class="activity-header">
-                            <span class="activity-time"><i class="icon-clock"></i> 19h00</span>
+                            <span class="activity-time"><i class="icon-clock"></i> 15h00</span>
+                            <span class="activity-duration">Retour sud pour sieste</span>
                         </div>
-                        <h3 class="activity-title">Dîner options</h3>
+                        <h3 class="activity-title">Après-midi libre & Options dîner</h3>
                         <p class="activity-description">
-                            Brisa Marina (bord de mer Playa Blanca), Casa Roja ou Lani's Grill (Marina Rubicón), ou chef privé à la villa pour tapas et paella.
+                            Retour vers Playa Blanca (1h). Sieste pendant le trajet. Fin d'après-midi libre : spa/massage pour les parents avec baby-sitter possible, ou balade à vélo familiale le long de la promenade littorale jusqu'au phare de Pechiguera.
                         </p>
+                        
+                        <div class="restaurant-section">
+                            <h4 class="restaurant-title"><i class="icon-restaurant"></i> Options dîner</h4>
+                            <div class="restaurant-item">
+                                <p class="restaurant-name">Chef privé à la villa</p>
+                                <p class="restaurant-details">
+                                    Expérience luxe décontractée : chef préparant tapas canariens (crevettes à l'ail, tortilla, pinchos) et paella mixte. Idéal pour profiter de la soirée une fois les enfants couchés.
+                                </p>
+                            </div>
+                            <div class="restaurant-item">
+                                <p class="restaurant-name">Brisa Marina</p>
+                                <p class="restaurant-details">
+                                    Restaurant canarien en bord de mer à Playa Blanca. Ambiance locale authentique.
+                                </p>
+                                <a href="https://maps.google.com/?q=Brisa+Marina+Playa+Blanca" target="_blank" class="restaurant-link">
+                                    <i class="icon-map"></i> Directions
+                                </a>
+                            </div>
+                            <div class="restaurant-item">
+                                <p class="restaurant-name">Marina Rubicón (soirée)</p>
+                                <p class="restaurant-details">
+                                    Casa Roja (maison rouge historique) : cuisine espagnole haute qualité, viandes grillées et riz noir. Ou Lani's Grill pour grillades dans ambiance plus animée. Vue nocturne sur les yachts illuminés.
+                                </p>
+                                <a href="https://maps.google.com/?q=Marina+Rubicon+Playa+Blanca" target="_blank" class="restaurant-link">
+                                    <i class="icon-map"></i> Directions
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -979,57 +1196,64 @@
             <!-- Jour 5 : Mercredi 28 Mai -->
             <section class="day-section" id="day-5">
                 <div class="day-header">
-                    <div class="day-date">Mercredi 28 Mai</div>
-                    <div class="day-theme">Marché de Marina Rubicón & Papagayo</div>
+                    <h2 class="day-date">Mercredi 28 Mai</h2>
+                    <p class="day-theme">Marché coloré & Plages paradisiaques</p>
                 </div>
                 
                 <div class="weather-widget">
                     <div class="weather-info">
                         <div class="weather-icon">☀️</div>
-                        <div>
+                        <div class="weather-details">
                             <div class="weather-temp">26°C</div>
                             <div class="weather-desc">Parfait pour la plage</div>
                         </div>
                     </div>
+                    <div class="weather-desc">Journée idéale</div>
                 </div>
                 
                 <div class="activity-card">
                     <div class="activity-content">
                         <div class="activity-header">
                             <span class="activity-time"><i class="icon-clock"></i> 10h30</span>
-                            <span class="activity-duration">1h</span>
+                            <span class="activity-duration">Marché hebdomadaire</span>
                         </div>
                         <h3 class="activity-title">Marché de Marina Rubicón</h3>
                         <p class="activity-description">
-                            Marché artisanal hebdomadaire du mercredi : bijoux en pierre volcanique, vannerie, produits locaux, ambiance musicale dans le cadre élégant du port.
+                            Marché artisanal du mercredi dans le cadre élégant du port de plaisance. Stands colorés : bijoux en pierre volcanique ou olivine, vannerie canarienne, miel d'abeille noire, épices pour mojo, souvenirs de qualité. Musique canarienne live parfois. Négociation gentille traditionnelle.
                         </p>
-                        
-                        <div class="quick-info">
-                            <div class="quick-info-item">
-                                <i class="icon-calendar"></i>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-item-icon"><i class="icon-calendar"></i></span>
                                 <span>Mercredis uniquement</span>
                             </div>
-                            <div class="quick-info-item">
-                                <i class="icon-car"></i>
-                                <span>10-15 min de route</span>
+                            <div class="info-item">
+                                <span class="info-item-icon"><i class="icon-car"></i></span>
+                                <span>10-15 min de la villa</span>
                             </div>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="activity-card">
-                    <div class="activity-content">
-                        <div class="activity-header">
-                            <span class="activity-time"><i class="icon-clock"></i> 12h00</span>
-                        </div>
-                        <h3 class="activity-title">Déjeuner tapas Marina</h3>
+                        <a href="https://maps.google.com/?q=Marina+Rubicon+Market+Wednesday" target="_blank" class="map-link">
+                            <i class="icon-map"></i> Voir sur Google Maps
+                        </a>
                         
                         <div class="restaurant-section">
+                            <h4 class="restaurant-title"><i class="icon-restaurant"></i> Déjeuner à la Marina</h4>
                             <div class="restaurant-item">
-                                <div class="restaurant-name">La Taberna</div>
-                                <div class="restaurant-details">
-                                    Meilleur restaurant familial de la marina. Poulpe galicien, seiches frites, fromage local au miel. Terrasse ombragée vue yachts. Menu enfants et glaciers à proximité (Bistro del Puerto).
-                                </div>
+                                <p class="restaurant-name">La Taberna</p>
+                                <p class="restaurant-details">
+                                    Réputé comme l'un des meilleurs de Playa Blanca avec enfants. Tapas variées : poulpe à la galicienne, seiches frites, fromage de chèvre local au miel, pimientos de Padrón, jambon ibérique. Menu enfants disponible. Terrasse ombragée vue yachts.
+                                </p>
+                                <a href="https://maps.google.com/?q=La+Taberna+Marina+Rubicon" target="_blank" class="restaurant-link">
+                                    <i class="icon-map"></i> Directions
+                                </a>
+                            </div>
+                            <div class="restaurant-item">
+                                <p class="restaurant-name">Bistro del Puerto</p>
+                                <p class="restaurant-details">
+                                    Juste à côté, réputé pour ses pizzas géantes et surtout ses glaces maison - les meilleures de Playa Blanca ! Parfait pour le dessert des enfants.
+                                </p>
+                                <a href="https://maps.google.com/?q=Bistro+del+Puerto+Marina+Rubicon" target="_blank" class="restaurant-link">
+                                    <i class="icon-map"></i> Directions
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -1039,33 +1263,55 @@
                     <div class="activity-content">
                         <div class="activity-header">
                             <span class="activity-time"><i class="icon-clock"></i> 16h30</span>
-                            <span class="activity-duration">2h</span>
+                            <span class="activity-duration">Paradis naturel</span>
                         </div>
                         <h3 class="activity-title">Plages de Papagayo</h3>
                         <p class="activity-description">
-                            Les plus belles plages de Lanzarote : criques de sable doré, eaux turquoise cristallines dans une anse abritée. Eau calme idéale pour les enfants.
+                            Joyaux naturels de l'île : criques de sable doré fin, eaux turquoise limpides dans des anses abritées du vent. La plus emblématique, Playa de Papagayo, forme un coquillage naturel. Eau calme comme une piscine naturelle, idéale avec de jeunes enfants. Vue sur Fuerteventura.
                         </p>
-                        
-                        <div class="quick-info">
-                            <div class="quick-info-item">
-                                <i class="icon-car"></i>
-                                <span>20 min + piste terre</span>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-item-icon"><i class="icon-car"></i></span>
+                                <span>15 min + piste terre</span>
                             </div>
-                            <div class="quick-info-item">
-                                <i class="icon-euro"></i>
+                            <div class="info-item">
+                                <span class="info-item-icon"><i class="icon-euro"></i></span>
                                 <span>3€ droit d'accès</span>
                             </div>
                         </div>
+                        <a href="https://maps.google.com/?q=Playas+de+Papagayo+Lanzarote" target="_blank" class="map-link">
+                            <i class="icon-map"></i> Voir sur Google Maps
+                        </a>
                         
                         <div class="tip-box">
-                            <div class="tip-box-title"><i class="icon-beach"></i> Conseils Papagayo</div>
+                            <p class="tip-box-title"><i class="icon-beach"></i> Conseils Papagayo</p>
                             <p class="tip-box-content">
-                                • Chemin de terre praticable en SUV (20 km/h max)<br>
-                                • Descente à pied 5 min (porter les petits)<br>
-                                • Chiringuito sur la falaise pour boissons<br>
-                                • Prévoir seaux et pelles<br>
-                                • Y aller après 17h : moins de monde
+                                • Route d'accès non goudronnée via Monument des Ajaches<br>
+                                • Rouler à 20 km/h max sur la piste (SUV sans problème)<br>
+                                • Parking sur plateau, puis descente à pied 5 min<br>
+                                • Chiringuito sur la falaise pour boissons fraîches<br>
+                                • Y aller après 17h : plage plus tranquille<br>
+                                • Prévoir seaux et pelles pour châteaux de sable !
                             </p>
+                        </div>
+                        
+                        <div class="restaurant-section">
+                            <h4 class="restaurant-title"><i class="icon-restaurant"></i> Options dîner</h4>
+                            <div class="restaurant-item">
+                                <p class="restaurant-name">Apéritif dînatoire à la villa</p>
+                                <p class="restaurant-details">
+                                    Soirée simple après la plage : produits du marché, fromage de chèvre local, jambon serrano, tortilla espagnole traiteur, tomates cerises de Teguise, mojo. Vin blanc Malvoisie pour les parents.
+                                </p>
+                            </div>
+                            <div class="restaurant-item">
+                                <p class="restaurant-name">Sebastyan's</p>
+                                <p class="restaurant-details">
+                                    Si envie de sortir : excellente adresse mêlant cuisine espagnole et touches grecques. Vue superbe depuis le balcon sur l'île de Lobos. Service habitué aux enfants.
+                                </p>
+                                <a href="https://maps.google.com/?q=Sebastyan's+Playa+Blanca" target="_blank" class="restaurant-link">
+                                    <i class="icon-map"></i> Directions
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1074,46 +1320,53 @@
             <!-- Jour 6 : Jeudi 29 Mai -->
             <section class="day-section" id="day-6">
                 <div class="day-header">
-                    <div class="day-date">Jeudi 29 Mai</div>
-                    <div class="day-theme">Jardin de Cactus & traditions</div>
+                    <h2 class="day-date">Jeudi 29 Mai</h2>
+                    <p class="day-theme">Jardin de Cactus & Traditions rurales</p>
                 </div>
                 
                 <div class="weather-widget">
                     <div class="weather-info">
                         <div class="weather-icon">☀️</div>
-                        <div>
+                        <div class="weather-details">
                             <div class="weather-temp">25°C</div>
-                            <div class="weather-desc">Beau temps</div>
+                            <div class="weather-desc">Ensoleillé</div>
                         </div>
                     </div>
+                    <div class="weather-desc">Journée lumineuse</div>
                 </div>
                 
                 <div class="activity-card">
                     <div class="activity-content">
                         <div class="activity-header">
                             <span class="activity-time"><i class="icon-clock"></i> 10h45</span>
-                            <span class="activity-duration">1h</span>
+                            <span class="activity-duration">Jardin botanique unique</span>
                         </div>
                         <h3 class="activity-title">Jardín de Cactus</h3>
                         <p class="activity-description">
-                            Dernière œuvre de Manrique (1990) : amphithéâtre de pierre volcanique avec 4500 cactus de 1400 espèces. Moulin traditionnel au sommet avec vue panoramique.
+                            Dernière grande œuvre de César Manrique (1990) sur le site d'une ancienne carrière. Amphithéâtre en terrasses de pierre volcanique noire abritant plus de 4500 spécimens de cactus de 1400 espèces différentes. Vieux moulin à gofio blanc au sommet offrant panorama 360°.
                         </p>
-                        
-                        <div class="quick-info">
-                            <div class="quick-info-item">
-                                <i class="icon-car"></i>
-                                <span>50-55 min de route</span>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-item-icon"><i class="icon-car"></i></span>
+                                <span>50-55 min via Guatiza</span>
                             </div>
-                            <div class="quick-info-item">
-                                <i class="icon-child"></i>
-                                <span>Formes amusantes pour enfants</span>
+                            <div class="info-item">
+                                <span class="info-item-icon"><i class="icon-camera"></i></span>
+                                <span>Photos spectaculaires</span>
                             </div>
                         </div>
+                        <a href="https://maps.google.com/?q=Jardin+de+Cactus+Lanzarote" target="_blank" class="map-link">
+                            <i class="icon-map"></i> Voir sur Google Maps
+                        </a>
                         
                         <div class="tip-box">
-                            <div class="tip-box-title">🌵 Avec les enfants</div>
+                            <p class="tip-box-title">🌵 Ludique pour les enfants</p>
                             <p class="tip-box-content">
-                                Les enfants s'amusent à repérer les formes de cactus (bonshommes, pieuvres). Bassin central avec poissons rouges. Lézards à chercher entre les plantes !
+                                • Formes étranges des cactus : bonshommes, chandeliers, pieuvres<br>
+                                • Grand bassin central avec nénuphars et poissons rouges<br>
+                                • Lézards à repérer entre les plantes<br>
+                                • Cafétéria dans une alcôve rocheuse (jus de cactus original !)<br>
+                                • Boutique souvenirs thème cactus
                             </p>
                         </div>
                     </div>
@@ -1123,20 +1376,31 @@
                     <div class="activity-content">
                         <div class="activity-header">
                             <span class="activity-time"><i class="icon-clock"></i> 13h00</span>
-                            <span class="activity-duration">1h30</span>
+                            <span class="activity-duration">Déjeuner champêtre</span>
                         </div>
                         <h3 class="activity-title">Monument au Paysan</h3>
                         <p class="activity-description">
-                            Hommage de Manrique aux agriculteurs. Restaurant dans une ferme traditionnelle restaurée, cour ombragée.
+                            Monument de Manrique (années 60) rendant hommage aux paysans lanzarotiens. Sculpture abstraite de 15m en réservoirs d'eau recyclés. Restaurant dans une ferme traditionnelle restaurée avec cour intérieure ombragée.
                         </p>
+                        <a href="https://maps.google.com/?q=Monumento+al+Campesino+Lanzarote" target="_blank" class="map-link">
+                            <i class="icon-map"></i> Voir sur Google Maps
+                        </a>
                         
                         <div class="restaurant-section">
+                            <h4 class="restaurant-title"><i class="icon-restaurant"></i> Restaurant du Monument</h4>
                             <div class="restaurant-item">
-                                <div class="restaurant-name">Restaurant du Monument</div>
-                                <div class="restaurant-details">
-                                    Cuisine canarienne authentique. Filet mignon mariné, ragoût de chèvre, poisson en croûte de sel. Menu enfants. Tout fait maison, grande qualité.
-                                </div>
+                                <p class="restaurant-name">Déjeuner traditionnel</p>
+                                <p class="restaurant-details">
+                                    Menu élaboré avec produits locaux. Entrées : soupe de courge, fromages et charcuteries des îles. Plats : filet mignon de porc canarien mariné, poisson du jour en croûte de sel, ragoût de chèvre typique. Menu enfant : steaks hachés frais ou escalopes panées. Dessert : bienmesabe (pâte sucrée aux amandes) avec glace vanille. Vin rouge Listán Negro ou bière Dorada.
+                                </p>
                             </div>
+                        </div>
+                        
+                        <div class="tip-box mt-3">
+                            <p class="tip-box-title"><i class="icon-tip"></i> Après le repas</p>
+                            <p class="tip-box-content">
+                                Petit musée artisanal : ateliers de potier, vigneron, tisserand reconstitués. Parfois démonstrations en direct. Four à pain traditionnel dans la cour.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -1144,12 +1408,35 @@
                 <div class="activity-card">
                     <div class="activity-content">
                         <div class="activity-header">
-                            <span class="activity-time"><i class="icon-clock"></i> Soirée</span>
+                            <span class="activity-time"><i class="icon-clock"></i> 15h00</span>
+                            <span class="activity-duration">Retour et soirée</span>
                         </div>
-                        <h3 class="activity-title">Options soirée</h3>
+                        <h3 class="activity-title">Après-midi libre & Dîner</h3>
                         <p class="activity-description">
-                            Playa Dorada ou piscine hôtel. Dîner : retour à El Golfo (Casa Torano, Costa Azul) ou Los Hervideros à Playa Blanca (viandes grillées).
+                            Retour à la villa (30 min). Options fin d'après-midi : Playa Dorada, piscine de l'hôtel avec maître-nageur, ou détente villa.
                         </p>
+                        
+                        <div class="restaurant-section">
+                            <h4 class="restaurant-title"><i class="icon-restaurant"></i> Options dîner (avant-dernier soir)</h4>
+                            <div class="restaurant-item">
+                                <p class="restaurant-name">Retour à El Golfo</p>
+                                <p class="restaurant-details">
+                                    Pour revoir le coucher de soleil sur l'Atlantique. Casa Torano ou Costa Azul : vieja grillée et gâteau au fromage maison. Mar Azul aussi excellente option. Chats mignons qui amusent les enfants.
+                                </p>
+                                <a href="https://maps.google.com/?q=El+Golfo+restaurants" target="_blank" class="restaurant-link">
+                                    <i class="icon-map"></i> Directions El Golfo (20 min)
+                                </a>
+                            </div>
+                            <div class="restaurant-item">
+                                <p class="restaurant-name">Los Hervideros (restaurant)</p>
+                                <p class="restaurant-details">
+                                    Sur la promenade de Playa Blanca. Excellentes viandes grillées et poissons du marché. Cadre élégant mais pas guindé. Promenade piétonne : enfants peuvent jouer en sécurité.
+                                </p>
+                                <a href="https://maps.google.com/?q=Los+Hervideros+restaurant+Playa+Blanca" target="_blank" class="restaurant-link">
+                                    <i class="icon-map"></i> Directions
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -1157,84 +1444,113 @@
             <!-- Jour 7 : Vendredi 30 Mai -->
             <section class="day-section" id="day-7">
                 <div class="day-header">
-                    <div class="day-date">Vendredi 30 Mai</div>
-                    <div class="day-theme">Aventure sous-marine & farniente</div>
+                    <h2 class="day-date">Vendredi 30 Mai</h2>
+                    <p class="day-theme">Sous l'océan & Dernières douceurs</p>
                 </div>
                 
                 <div class="weather-widget">
                     <div class="weather-info">
                         <div class="weather-icon">☀️</div>
-                        <div>
+                        <div class="weather-details">
                             <div class="weather-temp">26°C</div>
-                            <div class="weather-desc">Idéal</div>
+                            <div class="weather-desc">Magnifique</div>
                         </div>
                     </div>
+                    <div class="weather-desc">Dernière journée complète</div>
                 </div>
                 
                 <div class="activity-card">
                     <div class="activity-content">
                         <div class="activity-header">
                             <span class="activity-time"><i class="icon-clock"></i> 11h00</span>
-                            <span class="activity-duration">1h</span>
+                            <span class="activity-duration">Aventure sous-marine</span>
                         </div>
                         <h3 class="activity-title">Submarine Safari</h3>
                         <p class="activity-description">
-                            Véritable sous-marin touristique : plongée à 30m pour observer poissons multicolores, raies et épaves. Expérience unique et sûre, certificat de plongée nominatif en souvenir.
+                            Véritable sous-marin civil touristique à Puerto Calero. Plongée jusqu'à 30m de profondeur, larges hublots individuels. Observation des fonds marins : mérous, barracudas, dorades, raies, murènes. Passage près d'épaves avec plongeur. Certificat de plongée nominatif en souvenir.
+                        </p>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-item-icon"><i class="icon-car"></i></span>
+                                <span>30 min jusqu'à Puerto Calero</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-item-icon"><i class="icon-clock"></i></span>
+                                <span>50 min sous l'eau</span>
+                            </div>
+                        </div>
+                        <a href="https://maps.google.com/?q=Submarine+Safari+Puerto+Calero" target="_blank" class="map-link">
+                            <i class="icon-map"></i> Voir sur Google Maps
+                        </a>
+                        
+                        <div class="restaurant-section">
+                            <h4 class="restaurant-title"><i class="icon-restaurant"></i> Déjeuner à Puerto Calero</h4>
+                            <div class="restaurant-item">
+                                <p class="restaurant-name">La Pérola</p>
+                                <p class="restaurant-details">
+                                    Marina chic. Cuisine méditerranéenne, espadon grillé, carpaccio de poisson frais. Vue sur les yachts.
+                                </p>
+                                <a href="https://maps.google.com/?q=La+Perola+Puerto+Calero" target="_blank" class="restaurant-link">
+                                    <i class="icon-map"></i> Directions
+                                </a>
+                            </div>
+                            <div class="restaurant-item">
+                                <p class="restaurant-name">McSorley's</p>
+                                <p class="restaurant-details">
+                                    Gastropub irlandais. Excellents burgers gourmets, salades, plats internationaux. Coin jeux pour enfants - pratique !
+                                </p>
+                                <a href="https://maps.google.com/?q=McSorley's+Puerto+Calero" target="_blank" class="restaurant-link">
+                                    <i class="icon-map"></i> Directions
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="activity-content">
+                        <div class="activity-header">
+                            <span class="activity-time"><i class="icon-clock"></i> 15h00</span>
+                            <span class="activity-duration">Derniers plaisirs</span>
+                        </div>
+                        <h3 class="activity-title">Après-midi villa & Dîner d'adieu</h3>
+                        <p class="activity-description">
+                            Retour villa pour dernière sieste. Profiter une dernière fois de la piscine privée, promenade côte rocheuse, ou verre au Sea Lounge du Kamezí face au coucher de soleil.
                         </p>
                         
-                        <div class="quick-info">
-                            <div class="quick-info-item">
-                                <i class="icon-car"></i>
-                                <span>30 min Puerto Calero</span>
-                            </div>
-                            <div class="quick-info-item">
-                                <i class="icon-child"></i>
-                                <span>Fascinant pour enfants</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="activity-card">
-                    <div class="activity-content">
-                        <div class="activity-header">
-                            <span class="activity-time"><i class="icon-clock"></i> 12h30</span>
-                        </div>
-                        <h3 class="activity-title">Déjeuner Puerto Calero</h3>
-                        
                         <div class="restaurant-section">
+                            <h4 class="restaurant-title"><i class="icon-restaurant"></i> Dîner d'adieu</h4>
                             <div class="restaurant-item">
-                                <div class="restaurant-name">La Pérola</div>
-                                <div class="restaurant-details">Cuisine méditerranéenne, espadon grillé</div>
+                                <p class="restaurant-name">La Cocina de Colacho</p>
+                                <p class="restaurant-details">
+                                    Adresse raffinée du chef Colacho. Cuisine créative avec produits locaux, cadre élégant. Menu spécial enfants possible (filet de poisson ou mini steak). Menu dégustation canarien modernisé ou pièces de viande maturée. Service impeccable adapté aux familles.
+                                </p>
+                                <a href="https://maps.google.com/?q=La+Cocina+de+Colacho+Playa+Blanca" target="_blank" class="restaurant-link">
+                                    <i class="icon-map"></i> Directions
+                                </a>
                             </div>
                             <div class="restaurant-item">
-                                <div class="restaurant-name">McSorley's</div>
-                                <div class="restaurant-details">Gastropub irlandais, burgers gourmets, coin jeux enfants</div>
+                                <p class="restaurant-name">Alternative : El Mirador</p>
+                                <p class="restaurant-details">
+                                    Vue panoramique sur la baie illuminée. Plats espagnols succulents, tapas gourmandes (crevettes à l'ail, poulpe grillé). Ambiance plus décontractée et marine.
+                                </p>
+                                <a href="https://maps.google.com/?q=El+Mirador+Playa+Blanca" target="_blank" class="restaurant-link">
+                                    <i class="icon-map"></i> Directions
+                                </a>
+                            </div>
+                            <div class="restaurant-item">
+                                <p class="restaurant-name">Kamezí Bistro</p>
+                                <p class="restaurant-details">
+                                    Pour la commodité et la qualité de sa carte locavore si vous préférez rester près de la villa.
+                                </p>
                             </div>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="activity-card">
-                    <div class="activity-content">
-                        <div class="activity-header">
-                            <span class="activity-time"><i class="icon-clock"></i> Soirée</span>
-                        </div>
-                        <h3 class="activity-title">Dîner d'adieu</h3>
                         
-                        <div class="restaurant-section">
-                            <div class="restaurant-item">
-                                <div class="restaurant-name">La Cocina de Colacho</div>
-                                <div class="restaurant-details">
-                                    Chef Colacho, cuisine créative locale. Cadre élégant mais accueillant pour familles. Menu dégustation ou pièces de viande maturée.
-                                </div>
-                            </div>
-                            <div class="restaurant-item">
-                                <div class="restaurant-name">Alternative : Kamezí Bistro</div>
-                                <div class="restaurant-details">
-                                    Pour la commodité et qualité de sa carte locavore.
-                                </div>
-                            </div>
+                        <div class="tip-box mt-3">
+                            <p class="tip-box-title">🥂 Toast final</p>
+                            <p class="tip-box-content">
+                                Vin de Lanzarote ou cocktail local pour les parents. Ron Miel (rhum au miel) en digestif - sucré et facile à boire ! Barraquito sans caféine pour les enfants (lait mousseux avec sirop).
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -1243,29 +1559,40 @@
             <!-- Jour 8 : Samedi 31 Mai -->
             <section class="day-section" id="day-8">
                 <div class="day-header">
-                    <div class="day-date">Samedi 31 Mai</div>
-                    <div class="day-theme">Derniers instants & départ</div>
+                    <h2 class="day-date">Samedi 31 Mai</h2>
+                    <p class="day-theme">Derniers instants & Départ</p>
                 </div>
                 
                 <div class="weather-widget">
                     <div class="weather-info">
                         <div class="weather-icon">☀️</div>
-                        <div>
+                        <div class="weather-details">
                             <div class="weather-temp">25°C</div>
                             <div class="weather-desc">Journée parfaite</div>
                         </div>
                     </div>
+                    <div class="weather-desc">Départ en soirée</div>
                 </div>
                 
                 <div class="activity-card">
                     <div class="activity-content">
                         <div class="activity-header">
                             <span class="activity-time"><i class="icon-clock"></i> Matin</span>
+                            <span class="activity-duration">Matinée libre</span>
                         </div>
-                        <h3 class="activity-title">Matinée libre</h3>
+                        <h3 class="activity-title">Derniers moments à la villa</h3>
                         <p class="activity-description">
-                            Derniers plongeons dans la piscine privée. Check-out prolongé jusqu'à 13h. Possibilité de derniers achats souvenirs à Playa Blanca.
+                            Réveil en douceur, dernier petit-déjeuner dans le jardin. Derniers plongeons dans la piscine pour les enfants. Check-out prolongé jusqu'à 13h. Possibilité de sortie à Playa Blanca pour achats souvenirs (bonbons au miel de palmier, gel d'aloe vera).
                         </p>
+                        <div class="tip-box">
+                            <p class="tip-box-title"><i class="icon-tip"></i> Check-out</p>
+                            <p class="tip-box-content">
+                                • Valises déjà presque prêtes depuis la veille<br>
+                                • Personnel de l'hôtel aide avec les bagages<br>
+                                • Récupérer fromages et vins au frais<br>
+                                • Vérifier doudous dans les lits !
+                            </p>
+                        </div>
                     </div>
                 </div>
                 
@@ -1273,26 +1600,44 @@
                     <div class="activity-content">
                         <div class="activity-header">
                             <span class="activity-time"><i class="icon-clock"></i> 14h00</span>
-                            <span class="activity-duration">2h</span>
+                            <span class="activity-duration">Dernier déjeuner</span>
                         </div>
                         <h3 class="activity-title">Playa Honda</h3>
                         <p class="activity-description">
-                            Plage près de l'aéroport. Les enfants peuvent voir les avions décoller pendant le déjeuner. Plage sûre et peu profonde.
+                            Localité côtière au sud de l'aéroport (35 min de Playa Blanca). Longue plage de sable, restaurants locaux de qualité. Les enfants pourront voir les avions décoller et atterrir pas très loin - impressionnant mais pas assourdissant. Plage très sûre et peu profonde.
                         </p>
+                        <a href="https://maps.google.com/?q=Playa+Honda+Lanzarote" target="_blank" class="map-link">
+                            <i class="icon-map"></i> Voir sur Google Maps
+                        </a>
                         
                         <div class="restaurant-section">
-                            <div class="restaurant-title">Déjeuner final</div>
+                            <h4 class="restaurant-title"><i class="icon-restaurant"></i> Déjeuner les pieds dans le sable</h4>
                             <div class="restaurant-item">
-                                <div class="restaurant-name">Beach Bar Casa Tere / La Oca</div>
-                                <div class="restaurant-details">
-                                    Tapas les pieds dans le sable. Festival de saveurs locales une dernière fois.
-                                </div>
+                                <p class="restaurant-name">Beach Bar Casa Tere</p>
+                                <p class="restaurant-details">
+                                    Restaurant tapas réputé. Festival de saveurs locales une dernière fois. Terrasse pieds dans le sable.
+                                </p>
+                                <a href="https://maps.google.com/?q=Casa+Tere+Playa+Honda" target="_blank" class="restaurant-link">
+                                    <i class="icon-map"></i> Directions
+                                </a>
                             </div>
                             <div class="restaurant-item">
-                                <div class="restaurant-name">La Opera Bistro</div>
-                                <div class="restaurant-details">
-                                    Alternative méditerranéenne et pizzas si les enfants préfèrent.
-                                </div>
+                                <p class="restaurant-name">La Oca / Emmax</p>
+                                <p class="restaurant-details">
+                                    Tapas et poissons. Les enfants peuvent jouer sur la plage pendant que vous finissez tranquillement le repas.
+                                </p>
+                                <a href="https://maps.google.com/?q=La+Oca+Playa+Honda" target="_blank" class="restaurant-link">
+                                    <i class="icon-map"></i> Directions
+                                </a>
+                            </div>
+                            <div class="restaurant-item">
+                                <p class="restaurant-name">La Opera Bistro</p>
+                                <p class="restaurant-details">
+                                    Alternative méditerranéenne et pizzas si les enfants réclament des saveurs simples.
+                                </p>
+                                <a href="https://maps.google.com/?q=La+Opera+Bistro+Playa+Honda" target="_blank" class="restaurant-link">
+                                    <i class="icon-map"></i> Directions
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -1301,36 +1646,83 @@
                 <div class="activity-card">
                     <div class="activity-content">
                         <div class="activity-header">
-                            <span class="activity-time"><i class="icon-clock"></i> 20h00</span>
+                            <span class="activity-time"><i class="icon-clock"></i> 17h30</span>
+                            <span class="activity-duration">Direction aéroport</span>
                         </div>
                         <h3 class="activity-title">Vol retour</h3>
                         <p class="activity-description">
-                            Restitution voiture à 18h. Check-in et embarquement. Boutiques duty-free disponibles. Adiós Lanzarote !
+                            Aéroport d'Arrecife en 5 minutes depuis Playa Honda. Restitution de la voiture de location - agent pour prise en charge express. Check-in facilité par l'assistant. Vol retour à 18h00 (et non 20h). Les enfants s'endormiront rapidement dans l'avion, des images plein la tête.
                         </p>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-item-icon"><i class="icon-plane"></i></span>
+                                <span>Décollage 18h00</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-item-icon"><i class="icon-clock"></i></span>
+                                <span>Vol ~4h</span>
+                            </div>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <p class="tip-box-title">✈️ Adiós Lanzarote !</p>
+                            <p class="tip-box-content">
+                                "Tu te souviens le volcan ? Et les poissons du sous-marin !" - Des souvenirs inoubliables de cratères, plages dorées et moments en famille. Lanzarote vous invite déjà à revenir...
+                            </p>
+                        </div>
                     </div>
                 </div>
             </section>
+            
         </div>
         
         <!-- Map View -->
         <div class="page-content" id="mapContent">
             <div class="map-section">
-                <div class="map-header"><i class="icon-map"></i> Carte complète de Lanzarote</div>
-                <div class="map-container" style="height: 500px;">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224293.12463062768!2d-13.7674!3d29.0469!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xc462127b5fca5b3%3A0x5e7c3e6f3b9c51a0!2sLanzarote!5e0!3m2!1sen!2sfr!4v1693000000000!5m2!1sen!2sfr" style="width: 100%; height: 100%; border: 0;"></iframe>
+                <div class="map-header">📍 Carte générale de Lanzarote</div>
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224293.12463062768!2d-13.7674!3d29.0469!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xc462127b5fca5b3%3A0x5e7c3e6f3b9c51a0!2sLanzarote!5e0!3m2!1sen!2sfr!4v1693000000000!5m2!1sen!2sfr" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
                 </div>
             </div>
             
-            <div class="info-section mt-3">
+            <div class="info-section">
                 <h3 class="info-section-title">📍 Distances depuis Playa Blanca</h3>
                 <div class="info-content">
                     <p>
-                        • Aéroport d'Arrecife : 30 min (35 km)<br>
-                        • Timanfaya : 25 min (20 km)<br>
+                        <strong>Sud (proche)</strong><br>
+                        • Marina Rubicón : 10-15 min (5 km)<br>
+                        • Plages de Papagayo : 20 min + piste (15 km)<br>
+                        • El Golfo : 20 min (20 km)<br>
+                        • Timanfaya : 25 min (20 km)<br><br>
+                        
+                        <strong>Centre</strong><br>
+                        • Arrecife (capitale) : 30 min (35 km)<br>
+                        • Puerto del Carmen : 30 min (30 km)<br>
+                        • Puerto Calero : 30 min (25 km)<br>
+                        • Monument au Paysan : 30 min (30 km)<br>
+                        • Aéroport : 30 min (35 km)<br><br>
+                        
+                        <strong>Nord (1h environ)</strong><br>
+                        • La Geria (vignobles) : 30 min<br>
+                        • Teguise : 45 min (45 km)<br>
+                        • Jardín de Cactus : 50-55 min (55 km)<br>
                         • Jameos del Agua : 1h (70 km)<br>
-                        • Jardin de Cactus : 50 min (55 km)<br>
-                        • Marina Rubicón : 10 min (5 km)<br>
-                        • Plages de Papagayo : 20 min (15 km + piste)
+                        • Mirador del Río : 1h15 (75 km)
+                    </p>
+                </div>
+            </div>
+            
+            <div class="info-section">
+                <h3 class="info-section-title">🚗 Itinéraires jour par jour</h3>
+                <div class="info-content">
+                    <p>
+                        <strong>Dimanche 25</strong> : Villa → Timanfaya → Los Hervideros → El Golfo → Villa (circuit sud-ouest)<br>
+                        <strong>Mardi 27</strong> : Villa → Jameos del Agua → Arrieta → Villa (aller-retour nord)<br>
+                        <strong>Jeudi 29</strong> : Villa → Jardín de Cactus → Monument au Paysan → Villa (boucle nord-est)
                     </p>
                 </div>
             </div>
@@ -1340,63 +1732,89 @@
         <div class="page-content" id="infoContent">
             <div class="info-section">
                 <h3 class="info-section-title">📞 Contacts urgents</h3>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <div class="info-icon">🚨</div>
-                        <div class="info-content">
-                            <h4>Urgences</h4>
-                            <p>112 (numéro européen)<br>Centre médical Playa Blanca : +34 928 517 968</p>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-icon">🏨</div>
-                        <div class="info-content">
-                            <h4>Kamezí Villas</h4>
-                            <p>+34 928 518 730<br>Conciergerie 24/7</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="info-section">
-                <h3 class="info-section-title">🚗 Conseils conduite</h3>
                 <div class="info-content">
                     <p>
-                        • Routes en excellent état<br>
-                        • Vitesse max 90 km/h<br>
-                        • Essence moins chère qu'en France<br>
-                        • Station Disa à Playa Blanca<br>
-                        • Parkings gratuits partout<br>
-                        • Pour Papagayo : piste de terre praticable en SUV (20 km/h max)
+                        <strong>Urgences</strong> : 112 (numéro européen)<br>
+                        <strong>Centre médical Playa Blanca</strong> : +34 928 517 968<br>
+                        <strong>Kamezí Boutique Villas</strong> : +34 928 518 730<br>
+                        <strong>Conciergerie 24/7</strong> : Via réception hôtel<br>
+                        <strong>Agence location voiture</strong> : Communiqué à l'arrivée
                     </p>
                 </div>
             </div>
             
             <div class="info-section">
-                <h3 class="info-section-title">👶 Avec les enfants</h3>
+                <h3 class="info-section-title">🚗 Conseils conduite & logistique</h3>
                 <div class="info-content">
                     <p>
-                        • Crème solaire indice 50+ obligatoire<br>
+                        • Lanzarote fait 60 km du nord au sud<br>
+                        • Routes principales (LZ) en excellent état<br>
+                        • Vitesse max 90 km/h, les Canariens roulent calmement<br>
+                        • Essence moins chère qu'en France<br>
+                        • Station Disa à Playa Blanca<br>
+                        • Parking gratuit partout sauf Papagayo (3€)<br>
+                        • Papagayo : chemin de terre 2-3 km, rouler à 20 km/h max<br>
+                        • GPS hors-ligne recommandé (réseau faible à Timanfaya)
+                    </p>
+                </div>
+            </div>
+            
+            <div class="info-section">
+                <h3 class="info-section-title">👶 Voyager avec Georges & Joséphine</h3>
+                <div class="info-content">
+                    <p>
+                        <strong>Protection solaire</strong><br>
+                        • Crème indice 50+ obligatoire, réappliquer toutes les 2h<br>
                         • Chapeaux et lunettes indispensables<br>
-                        • Eau en permanence dans la voiture<br>
-                        • Sieste post-déjeuner respectée<br>
-                        • Brassards pour la mer (même au bord)<br>
-                        • Poussette canne utile pour certains sites<br>
+                        • T-shirts anti-UV pour la plage<br><br>
+                        
+                        <strong>Rythme adapté</strong><br>
+                        • Départs vers 10h pour respecter le rythme<br>
+                        • Sieste post-déjeuner cruciale (dans la voiture ou villa)<br>
+                        • Activités courtes le matin, plage l'après-midi<br><br>
+                        
+                        <strong>Équipements</strong><br>
+                        • Poussette canne pour certains sites<br>
+                        • Porte-bébé pour Papagayo (descente à pied)<br>
+                        • Brassards même au bord (Flamingo, Papagayo)<br>
+                        • Chaussures d'eau pour plages volcaniques<br><br>
+                        
+                        <strong>Pratique</strong><br>
+                        • Sac à dos "prêt à tout" : change, lingettes, snacks, eau<br>
+                        • WC dans tous les sites touristiques<br>
+                        • Chaises hautes dans tous les restaurants<br>
                         • Les Canariens adorent les enfants !
                     </p>
                 </div>
             </div>
             
             <div class="info-section">
-                <h3 class="info-section-title">🍷 Apéritifs locaux</h3>
+                <h3 class="info-section-title">🍷 Gastronomie & apéritifs locaux</h3>
                 <div class="info-content">
                     <p>
-                        • Vin blanc Malvasía Seco (volcanique)<br>
-                        • Bières locales : Dorada ou Tropical<br>
-                        • Papas arrugadas avec mojo<br>
-                        • Fromage de chèvre local<br>
-                        • Ron Miel (rhum au miel) en digestif<br>
-                        • Barraquito sans alcool pour enfants
+                        <strong>Vins de Lanzarote</strong><br>
+                        • Malvasía Seco : vin blanc volcanique fruité et minéral<br>
+                        • Listán Negro : rouge local<br>
+                        • Vignobles de La Geria à voir depuis la route<br><br>
+                        
+                        <strong>Bières locales</strong><br>
+                        • Dorada ou Tropical : blondes légères<br>
+                        • Servies en "jarra" avec citron<br><br>
+                        
+                        <strong>Tapas incontournables</strong><br>
+                        • Papas arrugadas : pommes de terre ridées au sel<br>
+                        • Mojo rouge (piment doux) et vert (coriandre)<br>
+                        • Fromage de chèvre local affiné<br>
+                        • Chorizo de Teror sucré<br><br>
+                        
+                        <strong>Digestifs</strong><br>
+                        • Ron Miel : rhum au miel, doux et sucré<br>
+                        • Barraquito : café local en couches (version sans caféine pour enfants)<br><br>
+                        
+                        <strong>Achats gourmands</strong><br>
+                        • Sel de Janubio, miel d'abeille noire<br>
+                        • Guacamole de cactus en épicerie fine<br>
+                        • Bienmesabe (crème d'amandes) à rapporter
                     </p>
                 </div>
             </div>
@@ -1405,54 +1823,94 @@
         <!-- Villa View -->
         <div class="page-content" id="villaContent">
             <div class="villa-hero">
-                <h2 class="villa-title">KAMEZÍ BOUTIQUE VILLAS</h2>
-                <p class="villa-subtitle">Votre havre de paix à Playa Blanca</p>
+                <h2 class="villa-title">Kamezí Boutique Villas</h2>
+                <p class="villa-subtitle">VILLA DELUXE VUE JARDIN</p>
             </div>
             
             <div class="info-section">
                 <h3 class="info-section-title">🏡 Votre villa privée</h3>
                 <div class="info-content">
                     <p>
-                        • Villa de plain-pied (idéale avec enfants)<br>
+                        <strong>Configuration</strong><br>
+                        • Villa de plain-pied (parfaite avec enfants)<br>
+                        • 2 chambres spacieuses<br>
+                        • 2 salles de bain complètes<br>
+                        • Salon-séjour avec cuisine ouverte<br>
+                        • Terrasse couverte avec mobilier<br><br>
+                        
+                        <strong>Équipements luxe</strong><br>
                         • Piscine privée chauffée<br>
-                        • Jardin clos et sécurisé<br>
-                        • Cuisine entièrement équipée<br>
-                        • 3 chambres, 2 salles de bain<br>
-                        • Climatisation dans toutes les pièces<br>
+                        • Jardin privatif clos et sécurisé<br>
                         • Vue partielle sur l'océan<br>
                         • Accès direct au littoral rocheux<br>
-                        • WiFi haut débit<br>
-                        • Lit bébé et chaise haute fournis
+                        • Climatisation dans toutes les pièces<br>
+                        • WiFi haut débit<br><br>
+                        
+                        <strong>Cuisine équipée</strong><br>
+                        • Four, micro-ondes, lave-vaisselle<br>
+                        • Machine Nespresso<br>
+                        • Grille-pain, bouilloire<br>
+                        • Ustensiles complets<br>
+                        • Barbecue dans le jardin<br><br>
+                        
+                        <strong>Pour les enfants</strong><br>
+                        • Lit bébé et chaise haute fournis<br>
+                        • Barrières de sécurité piscine sur demande<br>
+                        • Jeux de plage disponibles<br>
+                        • Espace de jeu dans le jardin
                     </p>
                 </div>
             </div>
             
             <div class="info-section">
-                <h3 class="info-section-title">🌟 Services inclus</h3>
+                <h3 class="info-section-title">🌟 Services & commodités</h3>
                 <div class="info-content">
                     <p>
-                        • Check-in/out personnalisé<br>
-                        • Conciergerie 24/7<br>
-                        • Service de courses avant arrivée<br>
-                        • Baby-sitting sur demande<br>
-                        • Restaurant Kamezí Bistro sur place<br>
-                        • Accès piscine principale de l'hôtel<br>
-                        • Spa et massages disponibles<br>
-                        • Prêt de vélos familiaux<br>
-                        • Parking privé
+                        <strong>Services inclus</strong><br>
+                        • Check-in/out personnalisé et flexible<br>
+                        • Conciergerie 24/7 multilingue<br>
+                        • Ménage quotidien (sauf dimanche)<br>
+                        • Changement serviettes/draps<br>
+                        • Peignoirs et pantoufles<br>
+                        • Produits d'accueil premium<br><br>
+                        
+                        <strong>Services sur demande</strong><br>
+                        • Courses avant arrivée<br>
+                        • Baby-sitting professionnel<br>
+                        • Chef privé à domicile<br>
+                        • Massages et soins spa<br>
+                        • Location vélos familiaux<br>
+                        • Transferts privés<br><br>
+                        
+                        <strong>Accès hôtel</strong><br>
+                        • Restaurant Kamezí Bistro<br>
+                        • Piscine principale avec maître-nageur<br>
+                        • Spa avec sauna et jacuzzi<br>
+                        • Salle de fitness<br>
+                        • Sea Lounge bar panoramique<br>
+                        • Parking privé gratuit
                     </p>
                 </div>
             </div>
             
             <div class="info-section">
-                <h3 class="info-section-title">📍 Localisation</h3>
+                <h3 class="info-section-title">📍 Situation idéale</h3>
                 <div class="info-content">
                     <p>
-                        Sud de Lanzarote, à 10 min en voiture du centre de Playa Blanca. Quartier calme et résidentiel, parfait pour les familles. Accès rapide aux plages et commerces.
+                        Le Kamezí Boutique Villas est situé dans un quartier résidentiel calme au sud de Lanzarote, à seulement 10 minutes en voiture du centre animé de Playa Blanca. Cette localisation offre le parfait équilibre entre tranquillité et proximité des commodités.<br><br>
+                        
+                        <strong>À proximité immédiate</strong><br>
+                        • Playa Flamingo : 5 min (plage familiale)<br>
+                        • Centre Playa Blanca : 10 min<br>
+                        • Marina Rubicón : 10-15 min<br>
+                        • Supermarchés : 10 min<br>
+                        • Plages de Papagayo : 20 min<br><br>
+                        
+                        L'emplacement permet un accès rapide à toutes les attractions du sud tout en offrant un havre de paix pour se ressourcer en famille.
                     </p>
-                </div>
-                <div class="map-container" style="height: 200px; margin-top: 15px;">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3544.9!2d-13.8430!3d28.8570!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xc463977c3a3a3a3%3A0x1234567890abcdef!2sKamez%C3%AD%20Boutique%20Villas!5e0!3m2!1sen!2sfr!4v1693000000000!5m2!1sen!2sfr" style="width: 100%; height: 100%; border: 0;"></iframe>
+                    <a href="https://maps.google.com/?q=Kamezi+Boutique+Villas+Playa+Blanca+Lanzarote" target="_blank" class="map-link">
+                        <i class="icon-map"></i> Voir l'emplacement exact
+                    </a>
                 </div>
             </div>
         </div>
@@ -1462,69 +1920,60 @@
     <nav class="bottom-nav">
         <a class="nav-item active" onclick="showView('days')">
             <div class="nav-item-icon">📅</div>
-            <span>Jours</span>
+            <span>JOURS</span>
         </a>
         <a class="nav-item" onclick="showView('map')">
             <div class="nav-item-icon">🗺️</div>
-            <span>Carte</span>
+            <span>CARTE</span>
         </a>
         <a class="nav-item" onclick="showView('info')">
             <div class="nav-item-icon">ℹ️</div>
-            <span>Infos</span>
+            <span>INFOS</span>
         </a>
         <a class="nav-item" onclick="showView('villa')">
             <div class="nav-item-icon">🏡</div>
-            <span>Villa</span>
+            <span>VILLA</span>
         </a>
     </nav>
     
     <script>
-        // Hide loading screen
+        // Hide loading
         window.addEventListener('load', () => {
             setTimeout(() => {
                 document.getElementById('loadingScreen').classList.add('hide');
-            }, 800);
+            }, 1000);
         });
         
-        // Navigation between days
+        // Navigation
         function showDay(dayNumber) {
-            // Hide all day sections
             document.querySelectorAll('.day-section').forEach(section => {
                 section.classList.remove('active');
             });
             
-            // Show selected day
             const selectedDay = document.getElementById(`day-${dayNumber}`);
             if (selectedDay) {
                 selectedDay.classList.add('active');
             }
             
-            // Update nav tabs
             document.querySelectorAll('.nav-tab').forEach((tab, index) => {
                 tab.classList.toggle('active', index === dayNumber - 1);
             });
             
-            // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            
-            // Save to localStorage
             localStorage.setItem('currentDay', dayNumber);
         }
         
         // View switching
         function showView(view) {
-            // Update bottom nav
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.classList.remove('active');
             });
             event.target.closest('.nav-item').classList.add('active');
             
-            // Hide all content
             document.querySelectorAll('.page-content').forEach(content => {
                 content.classList.remove('active');
             });
             
-            // Show selected content
             const dayNavTabs = document.getElementById('dayNavTabs');
             switch(view) {
                 case 'days':
@@ -1545,17 +1994,16 @@
                     break;
             }
             
-            // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         
-        // Restore last viewed day
+        // Restore last day
         const savedDay = localStorage.getItem('currentDay');
         if (savedDay) {
             showDay(parseInt(savedDay));
         }
         
-        // Add swipe gestures
+        // Swipe gestures
         let touchStartX = 0;
         let touchEndX = 0;
         
@@ -1576,10 +2024,8 @@
                 const currentDay = parseInt(localStorage.getItem('currentDay') || 1);
                 
                 if (diff > 0 && currentDay < 8) {
-                    // Swipe left - next day
                     showDay(currentDay + 1);
                 } else if (diff < 0 && currentDay > 1) {
-                    // Swipe right - previous day
                     showDay(currentDay - 1);
                 }
             }
